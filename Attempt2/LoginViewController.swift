@@ -1,0 +1,450 @@
+//
+//  LoginViewController.swift
+//  Attempt2
+//
+//  Created by Hunter Heard on 4/14/16.
+//  Copyright (c) 2016 Hunter Heard. All rights reserved.
+//
+
+import UIKit
+
+class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+
+    //let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration());
+    
+    //var task: NSURLSessionDataTask?
+
+    //not used
+    @IBOutlet weak var DeviceTable: UITableView!
+    
+    //A table view of the devices found on the current Weaved login
+    @IBOutlet var devTable: UITableView!
+    
+    //these are "links" to the username and password text boxes
+    //they should've been called "usernamebox" or something like that, but too late
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var password: UITextField!
+    
+    //these are "links" to the Login button and the activity indicator next to the Login button
+    @IBOutlet weak var loginIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var logButton: UIButton!
+    
+    //Indicator for fetching the list of weaved devices
+    @IBOutlet weak var listFetchIndicator: UIActivityIndicatorView!
+    
+    
+    //an array of weaved devices, set by the HTTP request in listDevices()
+    var devices = NSArray();
+    
+    //index of the device we will log in to
+    var devIndex = 0;
+
+    
+    
+    //When the login button is pressed, this method is called.
+    @IBAction func logPress(sender: UIButton) {
+        
+        sender.enabled = false;
+        
+        
+        
+        
+        var usern = username.text;
+        
+        var passw = password.text;
+        
+        if(passw == "")
+        {
+            println("Blank password.");
+            sender.enabled = true;
+            return;
+        }
+        
+        logInToWeaved(usern,passw: passw);
+        
+        
+    }
+    
+    //when the "login" button next to a Weaved device is pressed
+    @IBAction func devLoginButtonPress(sender: UIButton) {
+      
+        
+        var path = NSIndexPath(forRow: sender.tag, inSection: 0);
+        
+        var cell = devTable.cellForRowAtIndexPath(path);
+        
+        
+        
+        devWebiopiLogin(sender);
+        
+        
+    }
+    
+    //this is a test label I use to print information on the login attempt
+    @IBOutlet weak var logSuccessLabel: UILabel!
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        
+        //set the table to use the Login screen view controller as a datasource and delegate
+        //that way I can control it from this view controller
+        devTable.dataSource = self;
+        devTable.delegate = self;
+        
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    func logInToWeaved(usern: String, passw: String)
+    {
+        var tbc = self.parentViewController as MyTabBarController;
+        let session = NSURLSession.sharedSession()
+
+        
+        var urlText = "https://api.weaved.com/v22/api/user/login/";
+        
+        urlText += usern + "/";
+        urlText += passw;
+        
+        //these url and request objects are required for the connection method I use
+        let myUrl = NSURL(string: urlText);
+        let request = NSMutableURLRequest(URL:myUrl!);
+        
+        //set the httpmethod, and set a header value
+        request.HTTPMethod = "GET";
+        request.setValue("WeavedDemoKey$2015", forHTTPHeaderField: "apikey");
+   
+        //objects for response and response error
+        var reponseError: NSError?
+        var response: NSURLResponse?
+        
+        //var urlData: NSData?
+        
+        
+        loginIndicator.startAnimating();
+        
+        
+        //start task definition
+        let task = session.dataTaskWithRequest(request, completionHandler:{
+            urlData, response, error -> Void in
+            // this code runs asynchronously...
+            // ... i.e. later, after the request has completed (or failed)
+            
+            
+            
+            //odd bug
+            //with this dispatch code and self.reloadInputViews(); the indicator
+            //will stop spinning as soon as the stuff is printed.
+            //but with the extra self.loginIndicator.stopAnimating() outside of the dispatch code,
+            //the spinner stops animating, but doesn't disappear, as it is set to.....
+//            dispatch_async(dispatch_get_main_queue()) {
+//                self.loginIndicator.stopAnimating();
+//            }
+//            
+//            self.loginIndicator.stopAnimating();
+//            
+//            self.reloadInputViews();
+
+            println("reached dispatch");
+            dispatch_async(dispatch_get_main_queue()) {
+                self.loginIndicator.stopAnimating();
+                self.logButton.enabled = true;
+                
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+                else {println("no error");}
+                
+                if(urlData != nil)
+                {
+                    println("urlData != nil");
+                    //logSuccessLabel.text = "Success";
+                    
+                    //??
+                    let res = response as NSHTTPURLResponse!;
+                    
+                    
+                    var error: NSError?
+                    
+                    //jsonData is where the data for the response is kept
+                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                    var status = jsonData.valueForKey("status") as String;
+                    
+                    if(status == "true")
+                    {
+                        //we set the Token in the main TabBarController
+                        tbc.weavedToken = jsonData.valueForKey("token") as String;
+                        println(tbc.weavedToken);
+                        
+                        
+                        //set the label on the log screen
+                        self.logSuccessLabel.text = tbc.weavedToken;
+                        
+                        //clear the password box
+                        self.password.text = "";
+                        
+                        
+                        
+                        
+                        //self.reloadInputViews();
+                        
+                        self.listDevices();
+                        
+                    }
+                    else
+                    {
+                        self.logSuccessLabel.text = jsonData.valueForKey("reason") as String;
+                        
+                        
+                    }
+
+                }
+                else
+                {
+                    self.logSuccessLabel.text = "Failure";
+                }
+                
+                return;
+            }
+            
+        })
+        
+        task.resume();
+        
+        
+        
+        //THIS is the connection command
+        //var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError);
+
+        
+        
+        
+        
+
+//
+//        let task = NSURLSession.sharedSession().dataTaskWithRequest(request)
+//        {
+//                
+//            data, response, error in
+//            
+//            
+//            
+//        }
+//        
+//        
+//        task.resume();
+        
+        
+        
+    }
+    
+    
+    //this method requests a list of devices from Weaved
+    //it receives among other things an array of devices, which includes their names, addresses, stuff like that
+    //It puts that array into the variable called 'devices', and sets devCount to the number of devices
+    //Then it tells the table to reload itself, and the table uses 'devices' and devCount to do so
+    //So the actual listing is done by the tableview methods
+    func listDevices()
+    {
+        var tbc = self.parentViewController as MyTabBarController;
+        
+        
+        var urlText = "https://api.weaved.com/v22/api/device/list/all";
+        
+        let session = NSURLSession.sharedSession();
+
+        
+        
+        let myUrl = NSURL(string: urlText);
+        let request = NSMutableURLRequest(URL:myUrl!);
+        
+        //set some headers
+        request.HTTPMethod = "GET";
+        request.setValue("WeavedDemoKey$2015", forHTTPHeaderField: "apikey");
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type");
+        request.setValue(tbc.weavedToken, forHTTPHeaderField: "token");
+        
+        var reponseError: NSError?
+        var response: NSURLResponse?
+        
+        
+        //var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError);
+        
+        
+        
+        let listtask = session.dataTaskWithRequest(request, completionHandler:{
+            urlData, response, error -> Void in
+            
+            dispatch_async(dispatch_get_main_queue())
+            {//start dispatch
+                
+                self.listFetchIndicator.stopAnimating();
+                
+                if(urlData != nil)
+                {
+                    //logSuccessLabel.text = "Success";
+                    
+                    println("received list");
+                    
+                    let res = response as NSHTTPURLResponse!;
+                    
+                    
+                    var error: NSError?
+                    
+                    
+                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                    
+                    
+                    
+                    //devices is declared at the beginning of this class
+                    //it's an array of these devices
+                    self.devices = jsonData.valueForKey("devices") as NSArray;
+                    
+                    //logSuccessLabel.text = devices[0].valueForKey("devicealias") as? String;
+                    
+                    //the actual listing of the devices is done by the tableView functions in this class
+                    //this just sets up devices and devCount, and tells the table to reload
+                    
+                    
+                    
+                    var devCount = String(self.devices.count)
+                    //logSuccessLabel.text = devCount;
+                    
+                    self.devTable.reloadData();
+                    
+                    //DeviceTable.insertRowsAtIndexPaths(0, withRowAnimation: UITableViewRowAnimation.Automatic);
+                    
+                    
+                    
+                    
+                    
+                }
+                else
+                {
+                    self.logSuccessLabel.text = "Failure";
+                }
+                
+            }//end dispatch
+        })//end listtask
+        
+        println("sending list request...");
+        listFetchIndicator.startAnimating();
+        listtask.resume();
+    }
+    
+    //The number of cells in the device table gets set to the number of devices
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
+        return devices.count;
+    }
+   
+    //THIS is the method called when the table needs to define a cell at a certain index
+    //it gets called when a cell is scrolled off the screen I think
+    //it also gets called for every cell when the table is reloaded I think
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cellIdentifier = "ListTableViewCell";
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as ListTableViewCell
+        
+        cell.setName(devices[indexPath.row].valueForKey("devicealias") as String);
+        
+        cell.tag = indexPath.row;
+        
+        cell.devLogButton.tag = indexPath.row;
+        
+        return cell
+    }
+    
+    
+    //when a device is selected from the table after logging in to Weaved,
+    //we should call this function, which will attempt to contact the device.
+    //if successful, it will make some sort of signal on the login screen
+    //if successful, it will also perhaps make some sort of segue to the control screen
+    //it will set some variables that can be accessed from any of the view controllers
+    //  -variables declaring if the iPhone is logged into Weaved
+    //  -if we are logged into a Pi
+    //  -if we are making successful connections to the Pi?
+    //  -information required to access the Pi, and control the pins
+    //if unsuccessful, it will signal the login screen somehow with a fail message
+    func getListCellAtIndex(index: Int) -> ListTableViewCell
+    {
+        var path = NSIndexPath(forRow: index, inSection: 0);
+        
+        var cell = devTable.cellForRowAtIndexPath(path) as ListTableViewCell;
+        
+        return cell;
+    }
+    
+    func devWebiopiLogin(sen: UIButton)
+    {
+        
+        var tbc = self.parentViewController as MyTabBarController;
+        
+        //tbc = MyTabBarController, the main controller of all these view controllers
+        
+        //set up variables required for HTTP request thing to establish a connection with the raspberry pi through webiopi
+        
+        //lock the device login buttons
+        //set the spinner
+        //request the connection
+        
+        var successful = false;
+        
+        
+        
+        if(successful)
+        {
+            //  set the variable saying we are logged in to the pi (this should be on TBC)
+            tbc.webioPiLogged = true;
+            
+            var path = NSIndexPath(forRow: sen.tag, inSection: 0);
+            
+            var cell = devTable.cellForRowAtIndexPath(path) as ListTableViewCell;
+            
+            //  set this device's login button to 'logout'
+            //  stop the spinner
+            //  signal the log in screen somehow
+            cell.setName("(Logged in) + " + cell.aliasLabel.text!);
+            
+            
+            
+            //  set all the variables in TBC needed in order to talk to the Pi
+            //      pi address, token, whatever
+        }
+        
+        //if not successful
+        //  signal the login screen somehow
+        
+        
+        
+        //unlock the buttons
+        
+    }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
