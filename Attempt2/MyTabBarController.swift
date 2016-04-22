@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class MyTabBarController: UITabBarController {
 
@@ -14,6 +15,8 @@ class MyTabBarController: UITabBarController {
     //MARK Properties
     var tabCount = 0;
     var tabBarPins = [Pin]();
+    
+    var ipaddress = "";
     
     var weavedToken = "";
     
@@ -23,6 +26,8 @@ class MyTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getIP();
 
         // Do any additional setup after loading the view.
     }
@@ -34,6 +39,34 @@ class MyTabBarController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
+    func getIP() -> String
+    {
+        if(ipaddress != "")
+        {
+            return ipaddress;
+        }
+        
+        var url = NSURL(string: "http://ip.42.pl/raw");
+        
+        let request = NSMutableURLRequest(URL:url!);
+        request.HTTPMethod = "GET";
+        var response: NSURLResponse?
+        var reponseError: NSError?
+
+        
+        var urlData: NSData = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)!;
+
+        var ip = NSString(data: urlData, encoding: NSUTF8StringEncoding);
+        
+        ipaddress = ip as String;
+        
+        println(ipaddress);
+        
+        return ipaddress;
+        
+        
+
+    }
     
 
     /*

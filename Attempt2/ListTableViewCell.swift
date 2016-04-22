@@ -21,7 +21,7 @@ class ListTableViewCell: UITableViewCell {
     @IBAction func devButtonPress(sender: UIButton) {
         
         
-        spinner.startAnimating();
+        //spinner.startAnimating();
         
         //lock all other buttons
         //start rotating thing
@@ -42,7 +42,15 @@ class ListTableViewCell: UITableViewCell {
         aliasLabel.text = name;
     }
     
-    
+    func setLog(logged: Bool)
+    {
+        if(logged)
+        {
+            devLogButton.setTitle("L-Out", forState: UIControlState.Normal);
+            backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.3);
+            
+        }
+    }
     
     
     override func setSelected(selected: Bool, animated: Bool) {

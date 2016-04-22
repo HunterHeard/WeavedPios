@@ -112,6 +112,9 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func logInToWeaved(usern: String, passw: String)
     {
         var tbc = self.parentViewController as MyTabBarController;
+        
+        tbc.getIP();
+        
         let session = NSURLSession.sharedSession()
 
         
@@ -388,48 +391,153 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var cell = devTable.cellForRowAtIndexPath(path) as ListTableViewCell;
         
+        
+        
         return cell;
     }
     
-    func devWebiopiLogin(sen: UIButton)
+    //lock or unlock all of the login buttons in the device table
+    func setListButtonEnabled(enable: Bool)
     {
+        var nCells = devices.count;
         
-        var tbc = self.parentViewController as MyTabBarController;
-        
-        //tbc = MyTabBarController, the main controller of all these view controllers
-        
-        //set up variables required for HTTP request thing to establish a connection with the raspberry pi through webiopi
-        
-        //lock the device login buttons
-        //set the spinner
-        //request the connection
-        
-        var successful = false;
-        
-        
-        
-        if(successful)
+        if (nCells == 0)
         {
-            //  set the variable saying we are logged in to the pi (this should be on TBC)
-            tbc.webioPiLogged = true;
-            
-            var path = NSIndexPath(forRow: sen.tag, inSection: 0);
-            
-            var cell = devTable.cellForRowAtIndexPath(path) as ListTableViewCell;
-            
-            //  set this device's login button to 'logout'
-            //  stop the spinner
-            //  signal the log in screen somehow
-            cell.setName("(Logged in) + " + cell.aliasLabel.text!);
-            
-            
-            
-            //  set all the variables in TBC needed in order to talk to the Pi
-            //      pi address, token, whatever
+            return;
         }
         
-        //if not successful
-        //  signal the login screen somehow
+        nCells = nCells - 1;
+        
+        for index in 0...nCells
+        {
+            var cell = getListCellAtIndex(index);
+            
+            cell.devLogButton.enabled = enable;
+        }
+        
+        return;
+        
+    }
+    
+    
+    func devWebiopiLogin(sen: UIButton)
+    {
+        //tbc = MyTabBarController, the main controller of all these view controllers
+        var tbc = self.parentViewController as MyTabBarController;
+        
+        var dev = devices[sen.tag];
+        var UID = dev.valueForKey("deviceaddress") as String;
+        
+        var ipaddress = tbc.getIP();
+        
+        var cell = getListCellAtIndex(sen.tag);
+        
+        let session = NSURLSession.sharedSession();
+        
+        
+        var urlText = "https://api.weaved.com/v22/api/device/connect";
+        
+        var apiKey = "WeavedDemoKey$2015"
+        
+        
+        
+        //these url and request objects are required for the connection method I use
+        let myUrl = NSURL(string: urlText);
+        let request = NSMutableURLRequest(URL:myUrl!);
+ //       var body = NSData();
+        
+        //set the httpmethod, and set a header value
+        request.HTTPMethod = "POST";
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type");
+        request.setValue("WeavedDemoKey$2015", forHTTPHeaderField: "apikey");
+        request.setValue(tbc.weavedToken, forHTTPHeaderField: "token");
+        
+        var params = ["deviceaddress":UID, "hostip":ipaddress, "wait":"true"] as Dictionary<String, String>;
+        
+        var err: NSError?
+
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
+
+        
+//        body.setValue(UID, forKey: "deviceaddress");
+//        body.setValue(ipaddress, forKey: "hostip");
+//        body.setValue("true", forKey: "wait");
+        
+        //request.HTTPBody = body;
+        
+        
+        //objects for response and response error
+        var reponseError: NSError?
+        var response: NSURLResponse?
+        
+        cell.spinner.startAnimating();
+        setListButtonEnabled(false);
+        
+        let weblogtask = session.dataTaskWithRequest(request, completionHandler:{
+            urlData, response, error -> Void in
+            
+            println();
+            
+            dispatch_async(dispatch_get_main_queue())
+            {
+                
+                println("finished login request");
+                
+                //stop the spinner, unlock the buttons
+                cell.spinner.stopAnimating();
+                self.setListButtonEnabled(true);
+                
+                
+                if(urlData != nil)
+                {
+                    println("urlData != nil for WebIOPi");
+                    
+                    //  set the variable saying we are logged in to the pi (this should be on TBC)
+                    tbc.webioPiLogged = true;
+                    
+                    cell.setLog(true);
+                    
+                    
+                    let res = response as NSHTTPURLResponse!;
+                    
+                    
+                    var error: NSError?
+                    
+                    //jsonData is where the data for the response is kept
+                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                    
+                    println(jsonData.valueForKey("status") as String);
+                    
+                    
+                    println((jsonData.valueForKey("connection") as NSObject).valueForKey("proxy") as String);
+                    
+                    
+                    
+                    //  set this device's login button to 'logout'
+                    //cell.devLogButton.setTitle("Logged in", forState: UIControlState.Normal);
+                    
+                    
+                    //cell.setName("(Logged in) + " + cell.aliasLabel.text!);
+                    
+                    
+                    
+                    //  set all the variables in TBC needed in order to talk to the Pi
+                    //      pi address, token, whatever
+                }
+                
+                //if not successful
+                //  signal the login screen somehow
+                
+            }//end dispatch
+
+            
+            
+        })//end weblogtask
+        weblogtask.resume();
+        
+
+        
+        
         
         
         
