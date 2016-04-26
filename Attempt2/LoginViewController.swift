@@ -113,7 +113,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         var tbc = self.parentViewController as MyTabBarController;
         
-        tbc.getIP();
+        //tbc.getIP();
         
         let session = NSURLSession.sharedSession()
 
@@ -140,13 +140,12 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         loginIndicator.startAnimating();
         
-        
+        println("\nLogging in to Weaved...");
         //start task definition
         let task = session.dataTaskWithRequest(request, completionHandler:{
             urlData, response, error -> Void in
             // this code runs asynchronously...
             // ... i.e. later, after the request has completed (or failed)
-            
             
             
             //odd bug
@@ -191,7 +190,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     {
                         //we set the Token in the main TabBarController
                         tbc.weavedToken = jsonData.valueForKey("token") as String;
-                        println(tbc.weavedToken);
+                        println("token: " + tbc.weavedToken);
                         
                         
                         //set the label on the log screen
@@ -221,8 +220,14 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.logSuccessLabel.text = "Failure";
                 }
                 
+                
+                
+                
                 return;
             }
+            
+            tbc.getIP();
+
             
         })
         
@@ -287,8 +292,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         //var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError);
         
+        println("\nsending list request...");
+        listFetchIndicator.startAnimating();
         
-        
+        //start task
         let listtask = session.dataTaskWithRequest(request, completionHandler:{
             urlData, response, error -> Void in
             
@@ -342,11 +349,14 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 
             }//end dispatch
-        })//end listtask
-        
-        println("sending list request...");
-        listFetchIndicator.startAnimating();
+        })//end task
         listtask.resume();
+        
+        
+        
+        
+        
+        
     }
     
     //The number of cells in the device table gets set to the number of devices
@@ -497,6 +507,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     cell.setLog(true);
                     
+                    self.devIndex = sen.tag;
                     
                     let res = response as NSHTTPURLResponse!;
                     
@@ -508,10 +519,14 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     println(jsonData.valueForKey("status") as String);
                     
+                    var proxy = (jsonData.valueForKey("connection") as NSObject).valueForKey("proxy") as String;
                     
-                    println((jsonData.valueForKey("connection") as NSObject).valueForKey("proxy") as String);
                     
+                    println(proxy);
                     
+                    tbc.devProxy = proxy;
+                    
+                    self.devFetchTest();
                     
                     //  set this device's login button to 'logout'
                     //cell.devLogButton.setTitle("Logged in", forState: UIControlState.Normal);
@@ -543,6 +558,87 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         //unlock the buttons
         
+    }
+    
+    func devFetchTest()
+    {
+        var tbc = self.parentViewController as MyTabBarController;
+        
+        tbc.session = NSURLSession.sharedSession();
+        
+        
+        var urlText = tbc.devProxy + "/*";
+        
+        var cell = getListCellAtIndex(devIndex);
+        
+        let myUrl = NSURL(string: urlText);
+        let request = NSMutableURLRequest(URL:myUrl!);
+        
+        let loginString = NSString(format: "%@:%@", "webiopi", "raspberry");
+        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!;
+        tbc.base64LoginString = loginData.base64EncodedStringWithOptions(nil);
+        
+        
+        request.setValue("Basic \(tbc.base64LoginString)", forHTTPHeaderField: "Authorization")
+
+        
+        
+        //set some headers
+        request.HTTPMethod = "GET";
+        
+
+        
+        var reponseError: NSError?
+        var response: NSURLResponse?
+        
+        
+        //var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError);
+        
+        cell.spinner.startAnimating();
+        
+        //start task
+        let task = tbc.session.dataTaskWithRequest(request, completionHandler:{
+            urlData, response, error -> Void in
+            
+            dispatch_async(dispatch_get_main_queue())
+            {//start dispatch
+                
+                cell.spinner.stopAnimating();
+                
+                if(urlData == nil)
+                {
+                    println("nil on fetch from Pi");
+                    return;
+                }
+                
+                println("successful fetch from Pi");
+                
+                let res = response as NSHTTPURLResponse!;
+                var error: NSError?
+                
+                
+                //jsonData is where the data for the response is kept
+                let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                
+                
+                let pinarray = jsonData.valueForKey("GPIO") as NSDictionary;
+                
+                println(pinarray.valueForKey("0"));
+                
+                tbc.getPins();
+                
+                //println(jsonData);
+                
+                //println(urlData);
+                //println(res);
+                
+            }//end dispatch
+            
+            
+            
+        })//end task
+        
+        task.resume();
     }
 
     /*

@@ -26,6 +26,14 @@ class Pin {
     var Lname: String
     var stateName: String
     var type: Int
+    var function: Bool
+    
+    
+    
+    
+    //type 0: Ignore
+    //type 1: Control
+    //type 2: Monitor
     
     var on: Bool
     
@@ -39,7 +47,12 @@ class Pin {
         self.Lname = Lname;
         self.type = type;
         self.stateName = Lname;
+        self.function = false;
         
+        if(type == 1)
+        {
+            self.function = true;
+        }
         
         self.on = false;
         
@@ -53,11 +66,31 @@ class Pin {
         self.Lname = "Off";
         self.type = 0;
         self.stateName = "Off";
-        
+        self.function = false;
         
         self.on = false;
         
         
+    }
+    
+    func typeFunction(t: Int) -> Bool
+    {
+        if(t == 1)
+        {
+            return true;
+        }
+        
+        if(t == 2)
+        {
+            return false;
+        }
+        
+        if(t == 0)
+        {
+            return false;
+        }
+        
+        return false;
     }
     
     func changeState()
@@ -74,6 +107,41 @@ class Pin {
         return;
     }
     
+    func setFromData(data: NSDictionary)
+    {
+        println("\nPin setting data from outside");
+        
+        on = data.valueForKey("value") as Bool;
+        print("Value set to ");
+        stateName = Lname;
+        
+        if(on)
+        {
+            stateName = Hname;
+        }
+        
+        println(stateName);
+        
+        var t = data.valueForKey("function") as String;
+        
+        if(t == "IN")
+        {
+            type = 2;
+        }
+        
+        if(t == "OUT")
+        {
+            type = 1;
+        }
+        
+        typeFunction(type);
+        
+        print("Type set to ");
+        println(type);
+        return;
+        
+    }
+    
     func changeType()
     {
         type++;
@@ -82,6 +150,8 @@ class Pin {
         {
             type = 0;
         }
+        
+        function = typeFunction(type);
         
         
     }
@@ -104,7 +174,7 @@ class Pin {
     
     
     
-    func getEmpty() -> [Pin]
+    class func getEmpty() -> [Pin]
     {
         var pins = [Pin]();
         
@@ -112,6 +182,7 @@ class Pin {
         
         for i in 1...16
         {
+            p = Pin(name: "label", Hname: "On", Lname: "Off", type: 0);//without this line, pins will be an array full of references to the same one pin
             pins += [p];
         }
         

@@ -38,7 +38,7 @@
                                                 <action selector="switchTrip:" destination="yc1-O3-jvf" eventType="valueChanged" id="jt8-hJ-C4M"/>
                                             </connections>
                                         </switch>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mNB-Lf-Spj">
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mNB-Lf-Spj">
                                             <rect key="frame" x="566" y="12" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>

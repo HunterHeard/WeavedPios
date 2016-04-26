@@ -95,7 +95,7 @@ class OptionTableViewController: UITableViewController {
         if pins.count == 0
         {
             
-            loadSamplePins();
+            //loadSamplePins();
             
 //            var tempPin = Pin();
 //            for i in 1...8
@@ -244,12 +244,20 @@ class OptionTableViewController: UITableViewController {
         //tbc is the TabBarController that contains all the views
         var tbc = self.parentViewController as MyTabBarController;
         
+        println("Syncing with table");
+        
+        
+        
         //otherView is the PinTableViewController where we look at the pins and their states
         //  (right now the index is 0 because PTVC is the first view we look at)
         //  (I'd like to change this and make the Login screen (LoginViewController) the first one but I would probably break it)
         var otherView = tbc.childViewControllers[0] as PinTableViewController;
         
         otherView.pins = pins;
+        
+        otherView.printPinList();
+        
+        tbc.tabBarPins = pins;
         
         //I think this calls tableView(), which means all the cells get re-initialized, which they need to if anything has changed here in the options
         otherView.tableView.reloadData();
@@ -291,7 +299,8 @@ class OptionTableViewController: UITableViewController {
         cell.typeButton.setTitle(cell.getType(pin.type), forState: UIControlState.Normal)
         
         
-        
+        print("Loading Option Table Cell ")
+        println(indexPath.row);
         
         
         

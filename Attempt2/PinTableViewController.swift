@@ -15,6 +15,9 @@ class PinTableViewController: UITableViewController {
     
     var pins = [Pin]();
     
+    //var tbc = MyTabBarController();
+
+    
     
     
 
@@ -27,8 +30,10 @@ class PinTableViewController: UITableViewController {
     */
     
     @IBAction func switchHit(sender: PinUISwitch) {
+
         
         var number = sender.pinNumber;
+        var tbc = self.parentViewController as MyTabBarController;
         
         
         if(sender.pinNumber < 0 || sender.pinNumber >= pins.count)
@@ -38,8 +43,13 @@ class PinTableViewController: UITableViewController {
         
         //send request to raspberry pi to change state
         
-        pins[sender.pinNumber].changeState();
-        printPinList();
+        sender.enabled = false;
+        
+        tbc.setPin(number, newState: !pins[number].on);
+        
+        
+        //pins[sender.pinNumber].changeState();
+        //printPinList();
     }
     
     
@@ -107,6 +117,26 @@ class PinTableViewController: UITableViewController {
         return n;
     }
     
+    func numberOfPinsOfType(type: Int) -> Int
+    {
+        if(type == 0)
+        {
+            return pins.count - numberOfControlPins() - numberOfMonitorPins();
+        }
+        
+        if(type == 1)
+        {
+            return numberOfControlPins();
+        }
+        
+        if(type == 2)
+        {
+            return numberOfMonitorPins();
+        }
+        
+        return 0;
+    }
+    
     func printPinList()
     {
         
@@ -126,7 +156,10 @@ class PinTableViewController: UITableViewController {
     }
     
     
-    
+    //gets the pin number of the pin that belongs in the section and row
+    //(except here it's type instead of section
+    //if section == 0 then type == 1
+    //if section == 1 then type == 2
     func getPinDegree(type: Int, degree: Int) -> Int
     {
         
@@ -149,6 +182,43 @@ class PinTableViewController: UITableViewController {
         }
         
         return -1;
+    }
+    
+    func getCellForPinNumber(pNumber: Int) -> PinTableViewCell
+    {
+        var p = pins[pNumber];
+        
+        
+        var section = p.type - 1;
+        
+        
+        var cell = PinTableViewCell();
+        
+        for ind in 0 ... numberOfPinsOfType(p.type)-1
+        {
+            
+            
+            cell = getCellForSectionIndex(section, index: ind);
+            if(cell.onState.pinNumber == pNumber)
+            {
+                break;
+            }
+        }
+        
+        
+        return cell;
+    }
+    
+    func getCellForSectionIndex(section: Int, index: Int) -> PinTableViewCell
+    {
+        var path = NSIndexPath(forRow: index, inSection: section);
+        
+        var cell = tableView.cellForRowAtIndexPath(path) as PinTableViewCell;
+        
+        
+        
+        return cell;
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -207,6 +277,11 @@ class PinTableViewController: UITableViewController {
 //        
         cell.onState.on = pin.on;
         cell.onState.pinNumber = ind;
+        
+        if(pin.type == 2)
+        {
+            cell.onState.enabled = false;
+        }
         
         if(cell.onState.on == false)
         {

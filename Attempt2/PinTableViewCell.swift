@@ -36,14 +36,14 @@ class PinTableViewCell: UITableViewCell {
     
     @IBAction func switchTrip(sender: PinUISwitch) {
         
-        if(sender.on)
-        {
-            HLnameLabel.text = Hlabel;
-        }
-        else
-        {
-            HLnameLabel.text = Llabel;
-        }
+//        if(sender.on)
+//        {
+//            HLnameLabel.text = Hlabel;
+//        }
+//        else
+//        {
+//            HLnameLabel.text = Llabel;
+//        }
         
     }
     
