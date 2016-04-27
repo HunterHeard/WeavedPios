@@ -141,7 +141,7 @@ class MyTabBarController: UITabBarController {
                     let GPIOdata = jsonData.valueForKey("GPIO") as NSDictionary;
                     println(GPIOdata);
                     
-                    for index in 0 ... 15
+                    for index in 0 ... 39
                     {
                         print("setting pin ");
                         println(index);
@@ -234,7 +234,7 @@ class MyTabBarController: UITabBarController {
                         return;
                     }
                     
-                    println("successful post from Pi");
+
                     
                     let res = response as NSHTTPURLResponse!;
                     var error: NSError?
@@ -244,6 +244,7 @@ class MyTabBarController: UITabBarController {
                     //let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
                     
                     println(urlData);
+                    println(res);
                     
                     
                     var optionView = self.childViewControllers[1] as OptionTableViewController;
@@ -256,6 +257,7 @@ class MyTabBarController: UITabBarController {
                     
                     
                     cell.onState.enabled = true;
+                    cell.spinner.stopAnimating();
                     
                     
                     

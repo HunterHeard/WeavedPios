@@ -124,6 +124,8 @@ class Pin {
         
         var t = data.valueForKey("function") as String;
         
+        type = 0;
+        
         if(t == "IN")
         {
             type = 2;
@@ -133,6 +135,8 @@ class Pin {
         {
             type = 1;
         }
+        
+        
         
         typeFunction(type);
         
@@ -180,7 +184,7 @@ class Pin {
         
         var p = Pin(name: "label", Hname: "On", Lname: "Off", type: 0);
         
-        for i in 1...16
+        for i in 1...40
         {
             p = Pin(name: "label", Hname: "On", Lname: "Off", type: 0);//without this line, pins will be an array full of references to the same one pin
             pins += [p];

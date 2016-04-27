@@ -15,6 +15,8 @@ class PinTableViewCell: UITableViewCell {
     @IBOutlet weak var HLnameLabel: UILabel!
     @IBOutlet weak var onState: PinUISwitch!
 
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     var Hlabel: String!
     var Llabel: String!
     

@@ -35,6 +35,8 @@ class PinTableViewController: UITableViewController {
         var number = sender.pinNumber;
         var tbc = self.parentViewController as MyTabBarController;
         
+        var cell = getCellForPinNumber(number);
+        
         
         if(sender.pinNumber < 0 || sender.pinNumber >= pins.count)
         {
@@ -43,7 +45,9 @@ class PinTableViewController: UITableViewController {
         
         //send request to raspberry pi to change state
         
-        sender.enabled = false;
+        
+        cell.spinner.startAnimating();
+        //sender.enabled = false;
         
         tbc.setPin(number, newState: !pins[number].on);
         
@@ -274,13 +278,17 @@ class PinTableViewController: UITableViewController {
         cell.Hlabel = pin.Hname;
         cell.Llabel = pin.Lname;
         
+        cell.nameLabel.text = String(ind);
 //        
         cell.onState.on = pin.on;
         cell.onState.pinNumber = ind;
         
         if(pin.type == 2)
         {
-            cell.onState.enabled = false;
+            //cell.onState.enabled = false;
+            print("Set pin ");
+            print(ind);
+            println(" to disabled");
         }
         
         if(cell.onState.on == false)

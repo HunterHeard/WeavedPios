@@ -33,6 +33,8 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //Indicator for fetching the list of weaved devices
     @IBOutlet weak var listFetchIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var ErrorLabel: UILabel!
+    
     
     //an array of weaved devices, set by the HTTP request in listDevices()
     var devices = NSArray();
@@ -482,6 +484,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.spinner.startAnimating();
         setListButtonEnabled(false);
+        println("Attempting to gain proxy for device...");
         
         let weblogtask = session.dataTaskWithRequest(request, completionHandler:{
             urlData, response, error -> Void in
@@ -491,7 +494,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
             dispatch_async(dispatch_get_main_queue())
             {
                 
-                println("finished login request");
+                println("finished device proxy request");
                 
                 //stop the spinner, unlock the buttons
                 cell.spinner.stopAnimating();
@@ -500,14 +503,9 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 if(urlData != nil)
                 {
-                    println("urlData != nil for WebIOPi");
+                    //println("urlData != nil");
                     
-                    //  set the variable saying we are logged in to the pi (this should be on TBC)
-                    tbc.webioPiLogged = true;
                     
-                    cell.setLog(true);
-                    
-                    self.devIndex = sen.tag;
                     
                     let res = response as NSHTTPURLResponse!;
                     
@@ -517,31 +515,51 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     //jsonData is where the data for the response is kept
                     let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
                     
-                    println(jsonData.valueForKey("status") as String);
+                    var status = jsonData.valueForKey("status") as String;
                     
-                    var proxy = (jsonData.valueForKey("connection") as NSObject).valueForKey("proxy") as String;
+                    if(status == "false")
+                    {
+                        println("status: false");
+                        
+                        print("reason: ");
+                        println(jsonData.valueForKey("reason") as String);
+                        
+                        self.ErrorLabel.text = "WebIOPi device authentification failed";
+                        
+                        
+                    }
+                    else
+                    {
+                        //  set the variable saying we are logged in to the pi (this should be on TBC)
+                        tbc.webioPiLogged = true;
+                        cell.setLog(true);
+                        self.devIndex = sen.tag;
+                        
+                        var proxy = (jsonData.valueForKey("connection") as NSObject).valueForKey("proxy") as String;
+                        
+                        
+                        println(proxy);
+                        
+                        tbc.devProxy = proxy;
+                        
+                        self.devFetchTest();
+                        
+                        //  set this device's login button to 'logout'
+                        //cell.devLogButton.setTitle("Logged in", forState: UIControlState.Normal);
+                        
+                        
+                        //cell.setName("(Logged in) + " + cell.aliasLabel.text!);
+                        
+                        
+                        
+                        //  set all the variables in TBC needed in order to talk to the Pi
+                        //      pi address, token, whatever
+                    }
                     
                     
-                    println(proxy);
-                    
-                    tbc.devProxy = proxy;
-                    
-                    self.devFetchTest();
-                    
-                    //  set this device's login button to 'logout'
-                    //cell.devLogButton.setTitle("Logged in", forState: UIControlState.Normal);
-                    
-                    
-                    //cell.setName("(Logged in) + " + cell.aliasLabel.text!);
-                    
-                    
-                    
-                    //  set all the variables in TBC needed in order to talk to the Pi
-                    //      pi address, token, whatever
                 }
                 
-                //if not successful
-                //  signal the login screen somehow
+                
                 
             }//end dispatch
 
@@ -556,7 +574,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        //unlock the buttons
         
     }
     
