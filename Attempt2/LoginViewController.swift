@@ -120,7 +120,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         var tbc = self.parentViewController as! MyTabBarController;
         
-        //tbc.getIP();
+        tbc.setIP();
         
         let session = NSURLSession.sharedSession()
 
@@ -233,7 +233,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 return;
             }
             
-            tbc.getIP();
+            
 
             
         })
@@ -603,6 +603,9 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.passwordLabel.text! = "";
         
+        print("Username: " + usrn + "\nPassword: " + pass);
+        
+        
         let loginString = NSString(format: "%@:%@", usrn, pass);
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!;
         tbc.base64LoginString = loginData.base64EncodedStringWithOptions([]);
@@ -640,14 +643,28 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     return;
                 }
                 
-                print("successful fetch from Pi");
                 
                 let res = response as! NSHTTPURLResponse;
                 var error: NSError?
                 
+                print(error);
+                print(res);
+                
+                var jsonData = NSDictionary();
                 
                 //jsonData is where the data for the response is kept
-                let jsonData:NSDictionary = try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                do
+                {
+                    jsonData = try NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                }
+                catch
+                {
+                    print("jsonData from devFetchTest() failure");
+                    return;
+                }
+                
+                print("successful fetch from Pi");
+
                 
                 
                 let pinarray = jsonData.valueForKey("GPIO") as! NSDictionary;

@@ -62,30 +62,40 @@ class MyTabBarController: UITabBarController {
             return ipaddress;
         }
         
-        let url = NSURL(string: "http://ip.42.pl/raw");
-        
-        let request = NSMutableURLRequest(URL:url!);
-        request.HTTPMethod = "GET";
-        var response: NSURLResponse?
-        var reponseError: NSError?
-
-        var urlData = NSData();
-        //crashes here
-        do
+        if(ipaddress == "-1")
         {
-            urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response);
-        }
-        catch
-        {
-            return "";
+            print("IP address still waiting...");
+            return ipaddress;
         }
         
+        setIP();
         
-        let ip = NSString(data: urlData, encoding: NSUTF8StringEncoding);
-        
-        ipaddress = ip as! String;
-        
-        print(ipaddress);
+//        let url = NSURL(string: "http://ip.42.pl/raw");
+//        
+//        let request = NSMutableURLRequest(URL:url!);
+//        request.HTTPMethod = "GET";
+//        var response: NSURLResponse?
+//        var reponseError: NSError?
+//
+//        var urlData = NSData();
+//        //crashes here
+//        do
+//        {
+//            urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response);
+//        }
+//        catch
+//        {
+//            print("IP get failed");
+//            ipaddress = "";
+//            return "";
+//        }
+//        
+//        
+//        let ip = NSString(data: urlData, encoding: NSUTF8StringEncoding);
+//        
+//        ipaddress = ip as! String;
+//        
+//        print("IP: " + ipaddress);
         
         return ipaddress;
         
@@ -93,7 +103,62 @@ class MyTabBarController: UITabBarController {
 
     }
     
-    
+    func setIP()
+    {
+        
+        if(ipaddress == "")
+        {
+            ipaddress = "-1";
+        }
+        
+        let session = NSURLSession.sharedSession()
+        
+        
+        let urlText = "http://ip.42.pl/raw";
+        
+        //these url and request objects are required for the connection method I use
+        let myUrl = NSURL(string: urlText);
+        let request = NSMutableURLRequest(URL:myUrl!);
+        
+        //set the httpmethod, and set a header value
+        request.HTTPMethod = "GET";
+        
+        //objects for response and response error
+        var reponseError: NSError?
+        var response: NSURLResponse?
+        
+        
+        print("getting ip...");
+        //start task definition
+        let task = session.dataTaskWithRequest(request, completionHandler:{
+            urlData, response, error -> Void in
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                print(urlData);
+                print(response);
+                
+                do
+                {
+                    let ip = NSString(data: urlData!, encoding: NSUTF8StringEncoding);
+                    self.ipaddress = ip as! String;
+                }
+                catch
+                {
+                    print("IP set failed");
+                    return;
+                }
+                
+                print("IP fetch: " + self.ipaddress);
+                
+                
+            }//end of dispatch
+            
+        })//end of task
+        task.resume();
+        
+
+    }
     
     func getPins()
     {
@@ -232,6 +297,9 @@ class MyTabBarController: UITabBarController {
         
         //var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError);
         
+        var ps = "Posting " + nS + " to Pin " + String(pinNumber) + "...";
+        print(ps);
+        
         
         //start task
         let task = session.dataTaskWithRequest(request, completionHandler:{
@@ -240,34 +308,56 @@ class MyTabBarController: UITabBarController {
             dispatch_async(dispatch_get_main_queue())
                 {//start dispatch
                     
-                    
-                    
-                    if(urlData == nil)
-                    {
-                        print("nil on post from Pi");
-                        return;
-                    }
-                    
-
-                    
-                    let res = response as! NSHTTPURLResponse!;
-                    var error: NSError?
-                    
-                    
-                    //jsonData is where the data for the response is kept
-                    //let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
-                    
-                    print(urlData);
-                    print(res);
-                    
-                    
                     var optionView = self.childViewControllers[1] as! OptionTableViewController;
                     
                     var pinView = self.childViewControllers[0] as! PinTableViewController;
                     
-                    self.setPinValue(pinNumber, value: newState);
-                    
                     var cell = pinView.getCellForPinNumber(pinNumber);
+
+                    let res = response as! NSHTTPURLResponse!;
+                    var error: NSError?
+                    
+                    if(urlData == nil)
+                    {
+                        print("nil on post from Pi");
+                        cell.onState.on = !cell.onState.on;
+                        
+                        
+                    }
+                    else
+                    {
+                        //jsonData is where the data for the response is kept
+                        do
+                        {
+                            let jsonData:NSDictionary = try NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                            
+                            
+                            print("jsonData");
+                            print(jsonData);
+                            self.setPinValue(pinNumber, value: newState);
+                            
+                            
+                        }
+                        catch
+                        {
+                            print("jsonData not successful for pin set");
+                            cell.onState.on = !cell.onState.on;
+                        }
+
+                        
+                        
+                    }
+
+                    
+                    
+                    
+                    
+                    
+                    print("urlData:");
+                    print(urlData);
+                    
+                    print("res:");
+                    print(res);
                     
                     
                     cell.onState.enabled = true;

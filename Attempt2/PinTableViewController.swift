@@ -47,7 +47,7 @@ class PinTableViewController: UITableViewController {
         
         
         cell.spinner.startAnimating();
-        //sender.enabled = false;
+        sender.enabled = false;
         
         tbc.setPin(number, newState: !pins[number].on);
         
