@@ -50,7 +50,8 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         sender.enabled = false;
         
         
-        
+        self.view.endEditing(true);
+
         
         let usern = username.text;
         
@@ -71,11 +72,15 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //when the "login" button next to a Weaved device is pressed
     @IBAction func devLoginButtonPress(sender: UIButton) {
       
+        self.view.endEditing(true);
         
-        let path = NSIndexPath(forRow: sender.tag, inSection: 0);
+        var cell = getListCellAtIndex(sender.tag)
         
-        var cell = devTable.cellForRowAtIndexPath(path);
-        
+        if(cell.passwordLabel.text == "")
+        {
+            print("Blank device password");
+            return;
+        }
         
         
         devWebiopiLogin(sender);
@@ -432,6 +437,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
+    //this is incorrectly labeled as WebiopiLogin
     func devWebiopiLogin(sen: UIButton)
     {
         //tbc = MyTabBarController, the main controller of all these view controllers
@@ -522,8 +528,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     {
                         print("status: false");
                         
-                        print("reason: ");
-                        print(jsonData.valueForKey("reason") as! String);
+                        print("reason: " + (jsonData.valueForKey("reason") as! String));
                         
                         self.ErrorLabel.text = "WebIOPi device authentification failed";
                         
@@ -542,6 +547,8 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         print(proxy);
                         
                         tbc.devProxy = proxy;
+                        
+                        self.devIndex = sen.tag;
                         
                         self.devFetchTest();
                         
@@ -572,11 +579,9 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         
         
-        
-        
-        
-        
     }
+    
+    
     
     func devFetchTest()
     {
@@ -592,7 +597,13 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let myUrl = NSURL(string: urlText);
         let request = NSMutableURLRequest(URL:myUrl!);
         
-        let loginString = NSString(format: "%@:%@", "webiopi", "raspberry");
+        
+        let usrn = cell.userNameLabel.text!;
+        let pass = cell.passwordLabel.text!;
+        
+        cell.passwordLabel.text! = "";
+        
+        let loginString = NSString(format: "%@:%@", usrn, pass);
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!;
         tbc.base64LoginString = loginData.base64EncodedStringWithOptions([]);
         

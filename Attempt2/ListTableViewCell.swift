@@ -13,6 +13,9 @@ class ListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var aliasLabel: UILabel!
     
+    @IBOutlet weak var userNameLabel: UITextField!
+    @IBOutlet weak var passwordLabel: UITextField!
+    
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
