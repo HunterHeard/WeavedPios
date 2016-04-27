@@ -286,9 +286,9 @@ class PinTableViewController: UITableViewController {
         if(pin.type == 2)
         {
             //cell.onState.enabled = false;
-            print("Set pin ");
-            print(ind);
-            println(" to disabled");
+//            print("Set pin ");
+//            print(ind);
+//            println(" to disabled");
         }
         
         if(cell.onState.on == false)
