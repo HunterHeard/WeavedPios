@@ -42,7 +42,7 @@ class OptionTableViewController: UITableViewController {
             return;
         }
         
-        pins[sender.tag].setName(sender.text);
+        pins[sender.tag].setName(sender.text!);
         syncWithTable();
 
     }
@@ -54,7 +54,7 @@ class OptionTableViewController: UITableViewController {
             return;
         }
         
-        pins[sender.tag].setHname(sender.text);
+        pins[sender.tag].setHname(sender.text!);
         syncWithTable();
 
     }
@@ -66,7 +66,7 @@ class OptionTableViewController: UITableViewController {
             return;
         }
         
-        pins[sender.tag].setLname(sender.text);
+        pins[sender.tag].setLname(sender.text!);
         syncWithTable();
 
     }
@@ -167,16 +167,16 @@ class OptionTableViewController: UITableViewController {
         
         
         for p in pins{
-            print(p.name);
-            print(" ");
-            print(p.stateName);
+            print(p.name, terminator: "");
+            print(" ", terminator: "");
+            print(p.stateName, terminator: "");
             
-            println();
+            print("");
             
         }
         
         
-        println();
+        print("");
         
     }
     
@@ -231,7 +231,7 @@ class OptionTableViewController: UITableViewController {
     //not used
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         if segue.identifier == "segueUno" {
-            var viewControllerB = segue.destinationViewController as PinTableViewController
+            var viewControllerB = segue.destinationViewController as! PinTableViewController
             viewControllerB.pins = self.pins;
         }
     }
@@ -242,16 +242,16 @@ class OptionTableViewController: UITableViewController {
         //self.performSegueWithIdentifier("segueUno", sender: self);
 
         //tbc is the TabBarController that contains all the views
-        var tbc = self.parentViewController as MyTabBarController;
+        var tbc = self.parentViewController as! MyTabBarController;
         
-        println("Syncing with table");
+        print("Syncing with table");
         
         
         
         //otherView is the PinTableViewController where we look at the pins and their states
         //  (right now the index is 0 because PTVC is the first view we look at)
         //  (I'd like to change this and make the Login screen (LoginViewController) the first one but I would probably break it)
-        var otherView = tbc.childViewControllers[0] as PinTableViewController;
+        var otherView = tbc.childViewControllers[0] as! PinTableViewController;
         
         otherView.pins = pins;
         
@@ -270,7 +270,7 @@ class OptionTableViewController: UITableViewController {
         //ask someone what these mean
         let cellIdentifier = "OptionTableViewCell";
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as OptionTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! OptionTableViewCell
         
         
         
@@ -299,8 +299,8 @@ class OptionTableViewController: UITableViewController {
         cell.typeButton.setTitle(cell.getType(pin.type), forState: UIControlState.Normal)
         
         
-        print("Loading Option Table Cell ")
-        println(indexPath.row);
+        print("Loading Option Table Cell ", terminator: "")
+        print(indexPath.row);
         
         
         

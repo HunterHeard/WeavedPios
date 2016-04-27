@@ -33,7 +33,7 @@ class PinTableViewController: UITableViewController {
 
         
         var number = sender.pinNumber;
-        var tbc = self.parentViewController as MyTabBarController;
+        var tbc = self.parentViewController as! MyTabBarController;
         
         var cell = getCellForPinNumber(number);
         
@@ -146,16 +146,16 @@ class PinTableViewController: UITableViewController {
         
     
         for p in pins{
-            print(p.name);
-            print(" ");
-            print(p.stateName);
+            print(p.name, terminator: "");
+            print(" ", terminator: "");
+            print(p.stateName, terminator: "");
             
-            println();
+            print("");
             
         }
         
         
-        println();
+        print("");
         
     }
     
@@ -190,10 +190,10 @@ class PinTableViewController: UITableViewController {
     
     func getCellForPinNumber(pNumber: Int) -> PinTableViewCell
     {
-        var p = pins[pNumber];
+        let p = pins[pNumber];
         
         
-        var section = p.type - 1;
+        let section = p.type - 1;
         
         
         var cell = PinTableViewCell();
@@ -217,7 +217,7 @@ class PinTableViewController: UITableViewController {
     {
         var path = NSIndexPath(forRow: index, inSection: section);
         
-        var cell = tableView.cellForRowAtIndexPath(path) as PinTableViewCell;
+        var cell = tableView.cellForRowAtIndexPath(path) as! PinTableViewCell;
         
         
         
@@ -257,7 +257,7 @@ class PinTableViewController: UITableViewController {
         //ask someone what these mean
         let cellIdentifier = "PinTableViewCell";
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as PinTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! PinTableViewCell
 
         
         

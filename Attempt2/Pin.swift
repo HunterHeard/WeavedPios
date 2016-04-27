@@ -109,10 +109,10 @@ class Pin {
     
     func setFromData(data: NSDictionary)
     {
-        println("\nPin setting data from outside");
+        print("\nPin setting data from outside");
         
-        on = data.valueForKey("value") as Bool;
-        print("Value set to ");
+        on = data.valueForKey("value") as! Bool;
+        print("Value set to ", terminator: "");
         stateName = Lname;
         
         if(on)
@@ -120,9 +120,9 @@ class Pin {
             stateName = Hname;
         }
         
-        println(stateName);
+        print(stateName);
         
-        var t = data.valueForKey("function") as String;
+        var t = data.valueForKey("function") as! String;
         
         type = 0;
         
@@ -140,8 +140,8 @@ class Pin {
         
         typeFunction(type);
         
-        print("Type set to ");
-        println(type);
+        print("Type set to ", terminator: "");
+        print(type);
         return;
         
     }

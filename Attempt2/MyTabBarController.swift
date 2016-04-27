@@ -37,7 +37,7 @@ class MyTabBarController: UITabBarController {
         super.viewDidLoad()
         
         
-        println("loading Tab Bar Controller\n");
+        print("loading Tab Bar Controller\n");
         
         
         tabBarPins = Pin.getEmpty();
@@ -62,21 +62,30 @@ class MyTabBarController: UITabBarController {
             return ipaddress;
         }
         
-        var url = NSURL(string: "http://ip.42.pl/raw");
+        let url = NSURL(string: "http://ip.42.pl/raw");
         
         let request = NSMutableURLRequest(URL:url!);
         request.HTTPMethod = "GET";
         var response: NSURLResponse?
         var reponseError: NSError?
 
+        var urlData = NSData();
+        //crashes here
+        do
+        {
+            urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response);
+        }
+        catch
+        {
+            return "";
+        }
         
-        var urlData: NSData = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)!;
-
-        var ip = NSString(data: urlData, encoding: NSUTF8StringEncoding);
         
-        ipaddress = ip as String;
+        let ip = NSString(data: urlData, encoding: NSUTF8StringEncoding);
         
-        println(ipaddress);
+        ipaddress = ip as! String;
+        
+        print(ipaddress);
         
         return ipaddress;
         
@@ -125,28 +134,33 @@ class MyTabBarController: UITabBarController {
                     
                     if(urlData == nil)
                     {
-                        println("nil on fetch from Pi");
+                        print("nil on fetch from Pi");
                         return;
                     }
                     
-                    println("successful fetch from Pi");
+                    print("successful fetch from Pi");
                     
-                    let res = response as NSHTTPURLResponse!;
+                    let res = response as! NSHTTPURLResponse!;
                     var error: NSError?
                     
                     
                     //jsonData is where the data for the response is kept
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
                     
-                    let GPIOdata = jsonData.valueForKey("GPIO") as NSDictionary;
-                    println(GPIOdata);
+                   
+                    
+                    let jsonData:NSDictionary = try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                    
+                    
+                    
+                    let GPIOdata = jsonData.valueForKey("GPIO") as! NSDictionary;
+                    print(GPIOdata);
                     
                     for index in 0 ... 39
                     {
-                        print("setting pin ");
-                        println(index);
+                        print("setting pin ", terminator: "");
+                        print(index);
 
-                        self.tabBarPins[index].setFromData(GPIOdata.valueForKey(String(index)) as NSDictionary);
+                        self.tabBarPins[index].setFromData(GPIOdata.valueForKey(String(index)) as! NSDictionary);
                         
                         //self.printPinList();
                         
@@ -161,7 +175,7 @@ class MyTabBarController: UITabBarController {
                     
                     //self.printPinList();
                     
-                    var optionView = self.childViewControllers[1] as OptionTableViewController;
+                    var optionView = self.childViewControllers[1] as! OptionTableViewController;
                     
                     optionView.pins = self.tabBarPins;
                     optionView.tableView.reloadData();
@@ -230,26 +244,26 @@ class MyTabBarController: UITabBarController {
                     
                     if(urlData == nil)
                     {
-                        println("nil on post from Pi");
+                        print("nil on post from Pi");
                         return;
                     }
                     
 
                     
-                    let res = response as NSHTTPURLResponse!;
+                    let res = response as! NSHTTPURLResponse!;
                     var error: NSError?
                     
                     
                     //jsonData is where the data for the response is kept
                     //let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
                     
-                    println(urlData);
-                    println(res);
+                    print(urlData);
+                    print(res);
                     
                     
-                    var optionView = self.childViewControllers[1] as OptionTableViewController;
+                    var optionView = self.childViewControllers[1] as! OptionTableViewController;
                     
-                    var pinView = self.childViewControllers[0] as PinTableViewController;
+                    var pinView = self.childViewControllers[0] as! PinTableViewController;
                     
                     self.setPinValue(pinNumber, value: newState);
                     
@@ -277,18 +291,18 @@ class MyTabBarController: UITabBarController {
         
         
         for p in tabBarPins{
-            print(p.name);
-            print(" ");
-            print(p.stateName);
-            print(" ");
-            print(p.type);
+            print(p.name, terminator: "");
+            print(" ", terminator: "");
+            print(p.stateName, terminator: "");
+            print(" ", terminator: "");
+            print(p.type, terminator: "");
             
-            println();
+            print("");
             
         }
         
         
-        println();
+        print("");
         
     }
     
@@ -297,8 +311,8 @@ class MyTabBarController: UITabBarController {
     func setPinValue(pinNumber: Int, value: Bool)
     {
         tabBarPins[pinNumber].on = value;
-        var optionView = self.childViewControllers[1] as OptionTableViewController;
-        var pinView = self.childViewControllers[0] as PinTableViewController;
+        var optionView = self.childViewControllers[1] as! OptionTableViewController;
+        var pinView = self.childViewControllers[0] as! PinTableViewController;
         
         optionView.pins[pinNumber].on = value;
         pinView.pins[pinNumber].on = value;

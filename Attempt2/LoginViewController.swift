@@ -52,18 +52,18 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         
         
-        var usern = username.text;
+        let usern = username.text;
         
-        var passw = password.text;
+        let passw = password.text;
         
         if(passw == "")
         {
-            println("Blank password.");
+            print("Blank password.");
             sender.enabled = true;
             return;
         }
         
-        logInToWeaved(usern,passw: passw);
+        logInToWeaved(usern!,passw: passw!);
         
         
     }
@@ -72,7 +72,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func devLoginButtonPress(sender: UIButton) {
       
         
-        var path = NSIndexPath(forRow: sender.tag, inSection: 0);
+        let path = NSIndexPath(forRow: sender.tag, inSection: 0);
         
         var cell = devTable.cellForRowAtIndexPath(path);
         
@@ -113,7 +113,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func logInToWeaved(usern: String, passw: String)
     {
-        var tbc = self.parentViewController as MyTabBarController;
+        var tbc = self.parentViewController as! MyTabBarController;
         
         //tbc.getIP();
         
@@ -142,7 +142,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         loginIndicator.startAnimating();
         
-        println("\nLogging in to Weaved...");
+        print("\nLogging in to Weaved...");
         //start task definition
         let task = session.dataTaskWithRequest(request, completionHandler:{
             urlData, response, error -> Void in
@@ -163,36 +163,36 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //            
 //            self.reloadInputViews();
 
-            println("reached dispatch");
+            print("reached dispatch");
             dispatch_async(dispatch_get_main_queue()) {
                 self.loginIndicator.stopAnimating();
                 self.logButton.enabled = true;
                 
                 if let error = error{
-                    print(error.localizedDescription)
+                    print(error.localizedDescription, terminator: "")
                 }
-                else {println("no error");}
+                else {print("no error");}
                 
                 if(urlData != nil)
                 {
-                    println("urlData != nil");
+                    print("urlData != nil");
                     //logSuccessLabel.text = "Success";
                     
                     //??
-                    let res = response as NSHTTPURLResponse!;
+                    let res = response as! NSHTTPURLResponse!;
                     
                     
                     var error: NSError?
                     
                     //jsonData is where the data for the response is kept
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
-                    var status = jsonData.valueForKey("status") as String;
+                    let jsonData:NSDictionary = try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                    var status = jsonData.valueForKey("status") as! String;
                     
                     if(status == "true")
                     {
                         //we set the Token in the main TabBarController
-                        tbc.weavedToken = jsonData.valueForKey("token") as String;
-                        println("token: " + tbc.weavedToken);
+                        tbc.weavedToken = jsonData.valueForKey("token") as! String;
+                        print("token: " + tbc.weavedToken);
                         
                         
                         //set the label on the log screen
@@ -211,7 +211,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     else
                     {
-                        self.logSuccessLabel.text = jsonData.valueForKey("reason") as String;
+                        self.logSuccessLabel.text = jsonData.valueForKey("reason") as! String;
                         
                         
                     }
@@ -270,7 +270,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //So the actual listing is done by the tableview methods
     func listDevices()
     {
-        var tbc = self.parentViewController as MyTabBarController;
+        var tbc = self.parentViewController as! MyTabBarController;
         
         
         var urlText = "https://api.weaved.com/v22/api/device/list/all";
@@ -294,7 +294,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         //var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError);
         
-        println("\nsending list request...");
+        print("\nsending list request...");
         listFetchIndicator.startAnimating();
         
         //start task
@@ -310,21 +310,21 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 {
                     //logSuccessLabel.text = "Success";
                     
-                    println("received list");
+                    print("received list");
                     
-                    let res = response as NSHTTPURLResponse!;
+                    let res = response as! NSHTTPURLResponse!;
                     
                     
                     var error: NSError?
                     
                     
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                    let jsonData:NSDictionary = try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
                     
                     
                     
                     //devices is declared at the beginning of this class
                     //it's an array of these devices
-                    self.devices = jsonData.valueForKey("devices") as NSArray;
+                    self.devices = jsonData.valueForKey("devices") as! NSArray;
                     
                     //logSuccessLabel.text = devices[0].valueForKey("devicealias") as? String;
                     
@@ -375,9 +375,9 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var cellIdentifier = "ListTableViewCell";
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as ListTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ListTableViewCell
         
-        cell.setName(devices[indexPath.row].valueForKey("devicealias") as String);
+        cell.setName(devices[indexPath.row].valueForKey("devicealias") as! String);
         
         cell.tag = indexPath.row;
         
@@ -401,7 +401,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         var path = NSIndexPath(forRow: index, inSection: 0);
         
-        var cell = devTable.cellForRowAtIndexPath(path) as ListTableViewCell;
+        var cell = devTable.cellForRowAtIndexPath(path) as! ListTableViewCell;
         
         
         
@@ -422,7 +422,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         for index in 0...nCells
         {
-            var cell = getListCellAtIndex(index);
+            let cell = getListCellAtIndex(index);
             
             cell.devLogButton.enabled = enable;
         }
@@ -435,10 +435,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func devWebiopiLogin(sen: UIButton)
     {
         //tbc = MyTabBarController, the main controller of all these view controllers
-        var tbc = self.parentViewController as MyTabBarController;
+        var tbc = self.parentViewController as! MyTabBarController;
         
         var dev = devices[sen.tag];
-        var UID = dev.valueForKey("deviceaddress") as String;
+        var UID = dev.valueForKey("deviceaddress") as! String;
         
         var ipaddress = tbc.getIP();
         
@@ -468,7 +468,8 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var err: NSError?
 
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
+        //??
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
 
         
 //        body.setValue(UID, forKey: "deviceaddress");
@@ -484,17 +485,17 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         cell.spinner.startAnimating();
         setListButtonEnabled(false);
-        println("Attempting to gain proxy for device...");
+        print("Attempting to gain proxy for device...");
         
         let weblogtask = session.dataTaskWithRequest(request, completionHandler:{
             urlData, response, error -> Void in
             
-            println();
+            print("");
             
             dispatch_async(dispatch_get_main_queue())
             {
                 
-                println("finished device proxy request");
+                print("finished device proxy request");
                 
                 //stop the spinner, unlock the buttons
                 cell.spinner.stopAnimating();
@@ -507,22 +508,22 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     
                     
-                    let res = response as NSHTTPURLResponse!;
+                    let res = response as! NSHTTPURLResponse!;
                     
                     
                     var error: NSError?
                     
                     //jsonData is where the data for the response is kept
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                    let jsonData:NSDictionary = try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
                     
-                    var status = jsonData.valueForKey("status") as String;
+                    var status = jsonData.valueForKey("status") as! String;
                     
                     if(status == "false")
                     {
-                        println("status: false");
+                        print("status: false");
                         
                         print("reason: ");
-                        println(jsonData.valueForKey("reason") as String);
+                        print(jsonData.valueForKey("reason") as! String);
                         
                         self.ErrorLabel.text = "WebIOPi device authentification failed";
                         
@@ -535,10 +536,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         cell.setLog(true);
                         self.devIndex = sen.tag;
                         
-                        var proxy = (jsonData.valueForKey("connection") as NSObject).valueForKey("proxy") as String;
+                        var proxy = (jsonData.valueForKey("connection") as! NSObject).valueForKey("proxy") as! String;
                         
                         
-                        println(proxy);
+                        print(proxy);
                         
                         tbc.devProxy = proxy;
                         
@@ -579,7 +580,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func devFetchTest()
     {
-        var tbc = self.parentViewController as MyTabBarController;
+        var tbc = self.parentViewController as! MyTabBarController;
         
         tbc.session = NSURLSession.sharedSession();
         
@@ -593,7 +594,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let loginString = NSString(format: "%@:%@", "webiopi", "raspberry");
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!;
-        tbc.base64LoginString = loginData.base64EncodedStringWithOptions(nil);
+        tbc.base64LoginString = loginData.base64EncodedStringWithOptions([]);
         
         
         request.setValue("Basic \(tbc.base64LoginString)", forHTTPHeaderField: "Authorization")
@@ -624,23 +625,23 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 if(urlData == nil)
                 {
-                    println("nil on fetch from Pi");
+                    print("nil on fetch from Pi");
                     return;
                 }
                 
-                println("successful fetch from Pi");
+                print("successful fetch from Pi");
                 
-                let res = response as NSHTTPURLResponse!;
+                let res = response as! NSHTTPURLResponse;
                 var error: NSError?
                 
                 
                 //jsonData is where the data for the response is kept
-                let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                let jsonData:NSDictionary = try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
                 
                 
-                let pinarray = jsonData.valueForKey("GPIO") as NSDictionary;
+                let pinarray = jsonData.valueForKey("GPIO") as! NSDictionary;
                 
-                println(pinarray.valueForKey("0"));
+                print(pinarray.valueForKey("0"));
                 
                 tbc.getPins();
                 
