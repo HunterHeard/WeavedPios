@@ -20,9 +20,12 @@ April 21 2016
 This version is made in Xcode v 6.2 (6C131e)
 
 faq
-"How do I compile this?"
-I am not sure how Xcode does project imports. Attempt2.xcodeproj is the project file. You need the 'Attempt2' folder definitely, and 'Attempt2Tests' maybe. So take those three and try opening the project file, or importing it into Xcode.
+
+1. "How do I compile this?"
+
+Simply download Attempt2, Attempt2.xcodeproj, and Attempt2Tests, put them in the same folder somewhere on your mac, and open Attempt2.xcodeproj with Xcode. Once you've successfully imported the project, click the play button to compile and run. You may have to set the Target to iOS 9.1 or earlier.
 
 
-"What does this do that the official Weaved and WebIOPi apps don't do?"
-The notifications, labeling, and persistency should make this a bit more convenient than the official Weaved and WebIOPi apps
+2. "What does this do that the official Weaved and WebIOPi apps don't do?"
+
+The notifications, labeling, and persistency should make this a bit more convenient than the official Weaved and WebIOPi apps.
