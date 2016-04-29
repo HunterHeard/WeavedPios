@@ -285,10 +285,14 @@ class PinTableViewController: UITableViewController {
         
         if(pin.type == 2)
         {
-            //cell.onState.enabled = false;
+            cell.onState.enabled = false;
 //            print("Set pin ");
 //            print(ind);
 //            println(" to disabled");
+        }
+        else
+        {
+            cell.onState.enabled = true;
         }
         
         if(cell.onState.on == false)

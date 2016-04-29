@@ -80,21 +80,30 @@ class Pin {
         
     }
     
+    func changeFunction(newF: Bool)
+    {
+        function = newF;
+        
+        if(type != 0)
+        {
+            if(function)
+            {
+                type = 1;
+            }
+            else
+            {
+                type = 2;
+            }
+        }
+        
+        
+    }
+    
     func typeFunction(t: Int) -> Bool
     {
         if(t == 1)
         {
             return true;
-        }
-        
-        if(t == 2)
-        {
-            return false;
-        }
-        
-        if(t == 0)
-        {
-            return false;
         }
         
         return false;
@@ -136,11 +145,13 @@ class Pin {
         if(t == "IN")
         {
             type = 2;
+            function = false;
         }
         
         if(t == "OUT")
         {
             type = 1;
+            function = true;
         }
         
         
@@ -157,11 +168,12 @@ class Pin {
     
     func changeType()
     {
-        type++;
+        
+        type = type + 1;
         
         if(type > 2)
         {
-            type = 0;
+            type = 1;
         }
         
         function = typeFunction(type);

@@ -26,9 +26,16 @@ class OptionTableViewController: UITableViewController {
             return;
         }
         
-        pins[sender.tag].changeType();
+        let tbc = self.parentViewController as! MyTabBarController;
         
-        syncWithTable();
+        
+        sender.enabled = false;
+        
+        tbc.setFunction(sender, newFunction: !pins[sender.tag].function)
+        
+
+        
+        //Where's that list of webiopi http commands?
         
         
         
@@ -240,7 +247,7 @@ class OptionTableViewController: UITableViewController {
 
         // Return the number of rows in the section.
         
-        return numberOfGPIOPins();
+        return pins.count;
         
     }
 
@@ -272,7 +279,7 @@ class OptionTableViewController: UITableViewController {
         
         otherView.pins = pins;
         
-        otherView.printPinList();
+        //otherView.printPinList();
         
         tbc.tabBarPins = pins;
         
@@ -281,6 +288,16 @@ class OptionTableViewController: UITableViewController {
         
     }
     
+    func getCellAtIndex(index: Int) -> OptionTableViewCell
+    {
+        
+        let path = NSIndexPath(forRow: index, inSection: 0);
+        
+        let cell = tableView.cellForRowAtIndexPath(path) as! OptionTableViewCell;
+        
+        return cell;
+        
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -315,6 +332,10 @@ class OptionTableViewController: UITableViewController {
         
         cell.typeButton.setTitle(cell.getType(pin.type), forState: UIControlState.Normal)
         
+        if(!pin.isGPIO)
+        {
+            cell.typeButton.enabled = false;
+        }
         
         //print("Loading Option Table Cell ", terminator: "")
         //print(indexPath.row);
