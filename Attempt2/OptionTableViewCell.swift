@@ -28,6 +28,7 @@ class OptionTableViewCell: UITableViewCell {
 
     @IBAction func typePress(sender: UIButton) {
         
+        /*
         typeNumber++;
         
         if(typeNumber > 2)
@@ -36,6 +37,8 @@ class OptionTableViewCell: UITableViewCell {
         }
         
         sender.setTitle(getType(typeNumber), forState: UIControlState.Normal);
+ 
+        */
         
     }
     
@@ -64,12 +67,12 @@ class OptionTableViewCell: UITableViewCell {
         
         if(type == 1)
         {
-            return "Control"
+            return "OUT"
         }
         
         if(type == 2)
         {
-            return "Monitor"
+            return "IN"
         }
         
         return "Unknown"

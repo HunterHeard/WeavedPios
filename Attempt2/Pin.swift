@@ -26,7 +26,11 @@ class Pin {
     var Lname: String
     var stateName: String
     var type: Int
+    
+    //false = IN, true = OUT
     var function: Bool
+    
+    var isGPIO: Bool
     
     
     
@@ -48,6 +52,7 @@ class Pin {
         self.type = type;
         self.stateName = Lname;
         self.function = false;
+        self.isGPIO = false;
         
         if(type == 1)
         {
@@ -67,6 +72,8 @@ class Pin {
         self.type = 0;
         self.stateName = "Off";
         self.function = false;
+        self.isGPIO = false;
+        
         
         self.on = false;
         
@@ -138,6 +145,8 @@ class Pin {
         
         
         
+        
+        
         typeFunction(type);
         
         print("Type set to ", terminator: "");
@@ -184,7 +193,7 @@ class Pin {
         
         var p = Pin(name: "label", Hname: "On", Lname: "Off", type: 0);
         
-        for i in 1...40
+        for i in 1...28
         {
             p = Pin(name: "label", Hname: "On", Lname: "Off", type: 0);//without this line, pins will be an array full of references to the same one pin
             pins += [p];

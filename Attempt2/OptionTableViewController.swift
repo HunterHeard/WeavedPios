@@ -137,7 +137,7 @@ class OptionTableViewController: UITableViewController {
         var n = 0;
         
         for p in pins{
-            if(p.type == 2)
+            if(!p.function && p.isGPIO)
             {
                 n++;
             }
@@ -152,7 +152,7 @@ class OptionTableViewController: UITableViewController {
         var n = 0;
         
         for p in pins{
-            if(p.type == 1)
+            if(p.function && p.isGPIO)
             {
                 n++;
             }
@@ -181,7 +181,7 @@ class OptionTableViewController: UITableViewController {
     }
     
     
-    
+    //what does this do here?
     func getPinDegree(type: Int, degree: Int) -> Int
     {
         
@@ -221,10 +221,27 @@ class OptionTableViewController: UITableViewController {
         return 1
     }
 
+    func numberOfGPIOPins() -> Int
+    {
+        var count = 0;
+        
+        for p in pins
+        {
+            if(p.isGPIO)
+            {
+                count += 1;
+            }
+        }
+        
+        return count;
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
+
         // Return the number of rows in the section.
-        return pins.count;
+        
+        return numberOfGPIOPins();
+        
     }
 
 
@@ -299,8 +316,8 @@ class OptionTableViewController: UITableViewController {
         cell.typeButton.setTitle(cell.getType(pin.type), forState: UIControlState.Normal)
         
         
-        print("Loading Option Table Cell ", terminator: "")
-        print(indexPath.row);
+        //print("Loading Option Table Cell ", terminator: "")
+        //print(indexPath.row);
         
         
         

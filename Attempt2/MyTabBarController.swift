@@ -37,6 +37,7 @@ class MyTabBarController: UITabBarController {
         super.viewDidLoad()
         
         
+        
         print("loading Tab Bar Controller\n");
         
         
@@ -180,7 +181,6 @@ class MyTabBarController: UITabBarController {
         request.HTTPMethod = "GET";
         
         
-        
         var reponseError: NSError?
         var response: NSURLResponse?
         
@@ -220,12 +220,22 @@ class MyTabBarController: UITabBarController {
                     let GPIOdata = jsonData.valueForKey("GPIO") as! NSDictionary;
                     print(GPIOdata);
                     
-                    for index in 0 ... 39
+                    for index in 0 ... 27
                     {
                         print("setting pin ", terminator: "");
                         print(index);
 
                         self.tabBarPins[index].setFromData(GPIOdata.valueForKey(String(index)) as! NSDictionary);
+                        
+                        //set the name to the pin number
+                        self.tabBarPins[index].setName(String(index));
+                        
+                        //Determines by the index if it's actually a GPIO number
+                        if(index < 2 || index == 14 || index == 15 || index > 27)
+                        {
+                            self.tabBarPins[index].isGPIO = false;
+                            self.tabBarPins[index].type = 0;
+                        }
                         
                         //self.printPinList();
                         
@@ -245,6 +255,9 @@ class MyTabBarController: UITabBarController {
                     optionView.pins = self.tabBarPins;
                     optionView.tableView.reloadData();
                     optionView.syncWithTable();
+                    
+                    //sleep(10000);
+                    self.getPins();
                     
                     
             }//end dispatch
@@ -301,6 +314,7 @@ class MyTabBarController: UITabBarController {
         print(ps);
         
         
+        
         //start task
         let task = session.dataTaskWithRequest(request, completionHandler:{
             urlData, response, error -> Void in
@@ -317,47 +331,54 @@ class MyTabBarController: UITabBarController {
                     let res = response as! NSHTTPURLResponse!;
                     var error: NSError?
                     
-                    if(urlData == nil)
+                    if(res == nil)
                     {
                         print("nil on post from Pi");
                         cell.onState.on = !cell.onState.on;
-                        
-                        
                     }
                     else
                     {
                         //jsonData is where the data for the response is kept
                         do
                         {
-                            let jsonData:NSDictionary = try NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                            
+                            let jsonData:NSData = try NSJSONSerialization.JSONObjectWithData(urlData!, options:[]) as! NSData
                             
                             print("jsonData");
                             print(jsonData);
-                            self.setPinValue(pinNumber, value: newState);
-                            
                             
                         }
                         catch
                         {
                             print("jsonData not successful for pin set");
+                        }
+                        
+                        
+                        //Successful post!
+                        if(res.statusCode == 200)
+                        {
+                            self.setPinValue(pinNumber, value: newState);
+                        }
+                        else
+                        {
+                            print("Response status fail: " + String(res.statusCode));
                             cell.onState.on = !cell.onState.on;
                         }
 
-                        
-                        
                     }
 
                     
                     
                     
                     
-                    
+                    print();
                     print("urlData:");
                     print(urlData);
+                    print();
                     
                     print("res:");
                     print(res);
+                    
+                    //Status code: 200 is inside 'res' somewhere, THAT is what will tell me if we were successful
                     
                     
                     cell.onState.enabled = true;
