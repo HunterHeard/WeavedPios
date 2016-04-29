@@ -257,7 +257,7 @@ class MyTabBarController: UITabBarController {
                     optionView.syncWithTable();
                     
                     //sleep(10000);
-                    self.getPins();
+                    //self.getPins();
                     
                     
             }//end dispatch
@@ -388,7 +388,7 @@ class MyTabBarController: UITabBarController {
                     
             }//end dispatch
             
-            
+            self.getPins();
             
         })//end task
         

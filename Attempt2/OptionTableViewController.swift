@@ -189,7 +189,7 @@ class OptionTableViewController: UITableViewController {
         var I = 0;
         for p in pins{
             
-            if(p.type == type)
+            if(p.type == type && p.isGPIO)
             {
                 count++;
                 
