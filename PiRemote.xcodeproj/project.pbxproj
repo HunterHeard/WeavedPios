@@ -26,8 +26,6 @@
 		5AD060961CADF6EE00BD6930 /* OptionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD060951CADF6EE00BD6930 /* OptionTableViewController.swift */; };
 		5AD060981CADF71C00BD6930 /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD060971CADF71C00BD6930 /* OptionTableViewCell.swift */; };
 		5AD0609A1CAE026D00BD6930 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD060991CAE026D00BD6930 /* MyTabBarController.swift */; };
-		7017893377ED43A6352CBDC8 /* Pods_PiRemote2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A8108CAC018A0193CDEB82 /* Pods_PiRemote2Tests.framework */; };
-		98BD717BF376A33A06999254 /* Pods_PiRemote2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE2FBB2881ACBDC0FDBF9CF /* Pods_PiRemote2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,12 +62,6 @@
 		5AD060951CADF6EE00BD6930 /* OptionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewController.swift; sourceTree = "<group>"; };
 		5AD060971CADF71C00BD6930 /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		5AD060991CAE026D00BD6930 /* MyTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
-		8DE2FBB2881ACBDC0FDBF9CF /* Pods_PiRemote2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiRemote2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		98F14329E6F74BF219185F22 /* Pods-PiRemote2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiRemote2.release.xcconfig"; path = "Pods/Target Support Files/Pods-PiRemote2/Pods-PiRemote2.release.xcconfig"; sourceTree = "<group>"; };
-		A46CA54B6D9538B69B504C6F /* Pods-PiRemote2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiRemote2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PiRemote2/Pods-PiRemote2.debug.xcconfig"; sourceTree = "<group>"; };
-		F8A8108CAC018A0193CDEB82 /* Pods_PiRemote2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiRemote2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC27DC9684B28F5ECFD2F6ED /* Pods-PiRemote2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiRemote2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PiRemote2Tests/Pods-PiRemote2Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		FCC500E3B34BD9824697E2BC /* Pods-PiRemote2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiRemote2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PiRemote2Tests/Pods-PiRemote2Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +69,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98BD717BF376A33A06999254 /* Pods_PiRemote2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7017893377ED43A6352CBDC8 /* Pods_PiRemote2Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,8 +88,6 @@
 				5AD0606A1CAD8E9800BD6930 /* Attempt2 */,
 				5AD060801CAD8E9800BD6930 /* Attempt2Tests */,
 				5AD060691CAD8E9800BD6930 /* Products */,
-				D0254E1AB67AB985ACEA4252 /* Pods */,
-				B5C558071AFF2F846F6C9BC6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,26 +151,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B5C558071AFF2F846F6C9BC6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8DE2FBB2881ACBDC0FDBF9CF /* Pods_PiRemote2.framework */,
-				F8A8108CAC018A0193CDEB82 /* Pods_PiRemote2Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D0254E1AB67AB985ACEA4252 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A46CA54B6D9538B69B504C6F /* Pods-PiRemote2.debug.xcconfig */,
-				98F14329E6F74BF219185F22 /* Pods-PiRemote2.release.xcconfig */,
-				FC27DC9684B28F5ECFD2F6ED /* Pods-PiRemote2Tests.debug.xcconfig */,
-				FCC500E3B34BD9824697E2BC /* Pods-PiRemote2Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -190,12 +158,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5AD060871CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "PiRemote2" */;
 			buildPhases = (
-				843DA8C1BA24127D1374697F /* 📦 Check Pods Manifest.lock */,
 				5AD060641CAD8E9800BD6930 /* Sources */,
 				5AD060651CAD8E9800BD6930 /* Frameworks */,
 				5AD060661CAD8E9800BD6930 /* Resources */,
-				75841A5B998FF1F6E124288D /* 📦 Embed Pods Frameworks */,
-				8ABE18044F1D3B13274D604A /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,12 +175,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5AD0608A1CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "PiRemote2Tests" */;
 			buildPhases = (
-				7B9A9D4728144424432B2C1A /* 📦 Check Pods Manifest.lock */,
 				5AD060791CAD8E9800BD6930 /* Sources */,
 				5AD0607A1CAD8E9800BD6930 /* Frameworks */,
 				5AD0607B1CAD8E9800BD6930 /* Resources */,
-				B2A4AF366C9FF8045AF5EC9E /* 📦 Embed Pods Frameworks */,
-				347169B920012C5A59892712 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -294,99 +256,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		347169B920012C5A59892712 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PiRemote2Tests/Pods-PiRemote2Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		75841A5B998FF1F6E124288D /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PiRemote2/Pods-PiRemote2-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7B9A9D4728144424432B2C1A /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		843DA8C1BA24127D1374697F /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		8ABE18044F1D3B13274D604A /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PiRemote2/Pods-PiRemote2-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B2A4AF366C9FF8045AF5EC9E /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PiRemote2Tests/Pods-PiRemote2Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5AD060641CAD8E9800BD6930 /* Sources */ = {
@@ -530,7 +399,6 @@
 		};
 		5AD060881CAD8E9800BD6930 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A46CA54B6D9538B69B504C6F /* Pods-PiRemote2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -545,7 +413,6 @@
 		};
 		5AD060891CAD8E9800BD6930 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98F14329E6F74BF219185F22 /* Pods-PiRemote2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -560,7 +427,6 @@
 		};
 		5AD0608B1CAD8E9800BD6930 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC27DC9684B28F5ECFD2F6ED /* Pods-PiRemote2Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -580,7 +446,6 @@
 		};
 		5AD0608C1CAD8E9800BD6930 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCC500E3B34BD9824697E2BC /* Pods-PiRemote2Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
