@@ -78,6 +78,16 @@ class OptionTableViewCell: UITableViewCell {
         return "Unknown"
     }
     
+    func enable(enab: Bool)
+    {
+        typeButton.enabled = enab;
+        nameLabel.enabled = enab;
+        Hlabel.enabled = enab;
+        Llabel.enabled = enab;
+    }
+    
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

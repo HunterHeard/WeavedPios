@@ -127,8 +127,11 @@ class Pin {
     {
         print("\nPin setting data from outside");
         
+        //pin state set
         on = data.valueForKey("value") as! Bool;
         print("Value set to ", terminator: "");
+        
+        
         stateName = Lname;
         
         if(on)
@@ -138,6 +141,7 @@ class Pin {
         
         print(stateName);
         
+        //t = function (IN or OUT)
         var t = data.valueForKey("function") as! String;
         
         type = 0;

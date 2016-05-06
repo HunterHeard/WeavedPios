@@ -228,7 +228,10 @@ class MyTabBarController: UITabBarController {
                         self.tabBarPins[index].setFromData(GPIOdata.valueForKey(String(index)) as! NSDictionary);
                         
                         //set the name to the pin number
-                        self.tabBarPins[index].setName(String(index));
+                        if(self.tabBarPins[index].name == "label")
+                        {
+                            self.tabBarPins[index].setName(String(index));
+                        }
                         
                         
                         self.tabBarPins[index].isGPIO = true;
@@ -271,6 +274,31 @@ class MyTabBarController: UITabBarController {
         
         task.resume();
         
+        
+        
+    }
+    
+    func sendRequest(urlText: String, httpType: String)
+    {
+        let myUrl = NSURL(string: urlText);
+        let request = NSMutableURLRequest(URL:myUrl!);
+
+        
+        //set some headers
+        request.HTTPMethod = httpType;
+        
+        
+        let reponseError: NSError?
+        let response: NSURLResponse?
+        
+        
+        //start task
+        let task = session.dataTaskWithRequest(request, completionHandler:{
+            urlData, response, error -> Void in
+            
+        })//end task
+        
+        task.resume();
         
         
     }

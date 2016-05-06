@@ -9,13 +9,13 @@
         <!--Item-->
         <scene sceneID="aJI-8j-CLW">
             <objects>
-                <tableViewController id="h7l-hh-m3m" customClass="PinTableViewController" customModule="Attempt2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="h7l-hh-m3m" customClass="PinTableViewController" customModule="PiRemote2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="mok-ru-c22">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PinTableViewCell" id="yc1-O3-jvf" customClass="PinTableViewCell" customModule="Attempt2" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PinTableViewCell" id="yc1-O3-jvf" customClass="PinTableViewCell" customModule="PiRemote2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yc1-O3-jvf" id="ZM0-zF-WQh">
@@ -34,7 +34,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lcb-ov-flc" customClass="PinUISwitch" customModule="Attempt2" customModuleProvider="target">
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lcb-ov-flc" customClass="PinUISwitch" customModule="PiRemote2" customModuleProvider="target">
                                             <rect key="frame" x="503" y="6" width="51" height="31"/>
                                             <connections>
                                                 <action selector="switchHit:" destination="h7l-hh-m3m" eventType="valueChanged" id="UVU-zS-ubj"/>
@@ -73,23 +73,23 @@
         <!--Item-->
         <scene sceneID="WtK-KQ-Ple">
             <objects>
-                <tableViewController id="cuY-V1-ifx" customClass="OptionTableViewController" customModule="Attempt2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cuY-V1-ifx" customClass="OptionTableViewController" customModule="PiRemote2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="22" sectionFooterHeight="22" id="Cvz-oN-pgw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionTableViewCell" rowHeight="76" id="qbD-Jt-TdI" customClass="OptionTableViewCell" customModule="Attempt2" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionTableViewCell" rowHeight="76" id="qbD-Jt-TdI" customClass="OptionTableViewCell" customModule="PiRemote2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="22" width="600" height="76"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qbD-Jt-TdI" id="EqY-1z-x9Y">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="High State" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qVx-hu-6q3">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="High State" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qVx-hu-6q3">
                                             <rect key="frame" x="180" y="9" width="97" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="97" id="hoj-k2-VGV"/>
+                                                <constraint firstAttribute="width" constant="97" id="Vix-Oo-RdE"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -97,7 +97,7 @@
                                                 <action selector="HnameChange:" destination="cuY-V1-ifx" eventType="editingDidEnd" id="U0A-i3-KbX"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Low State" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KHh-Yu-ceF">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Low State" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KHh-Yu-ceF">
                                             <rect key="frame" x="180" y="40" width="97" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -105,8 +105,11 @@
                                                 <action selector="LnameChange:" destination="cuY-V1-ifx" eventType="editingDidEnd" id="BzV-dH-zNH"/>
                                             </connections>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUx-rw-xf9">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUx-rw-xf9">
                                             <rect key="frame" x="285" y="24" width="58" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="58" id="vgs-gN-PJr"/>
+                                            </constraints>
                                             <state key="normal" title="Type">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -115,8 +118,11 @@
                                                 <action selector="typePress:" destination="qbD-Jt-TdI" eventType="touchUpInside" id="TxV-rf-OSS"/>
                                             </connections>
                                         </button>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxh-Ji-7mx">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxh-Ji-7mx">
                                             <rect key="frame" x="8" y="23" width="97" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="97" id="6JG-kU-O17"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
@@ -125,9 +131,15 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="qVx-hu-6q3" firstAttribute="top" secondItem="EqY-1z-x9Y" secondAttribute="topMargin" id="7fG-4n-U6Z"/>
-                                        <constraint firstItem="KHh-Yu-ceF" firstAttribute="leading" secondItem="qVx-hu-6q3" secondAttribute="leading" id="JIf-z3-P6s"/>
-                                        <constraint firstItem="KHh-Yu-ceF" firstAttribute="top" secondItem="qVx-hu-6q3" secondAttribute="bottom" constant="1" id="r9Y-ET-7VB"/>
+                                        <constraint firstItem="qVx-hu-6q3" firstAttribute="leading" secondItem="yxh-Ji-7mx" secondAttribute="trailing" constant="75" id="1P3-cT-jHp"/>
+                                        <constraint firstItem="yxh-Ji-7mx" firstAttribute="leading" secondItem="EqY-1z-x9Y" secondAttribute="leadingMargin" id="DM4-Pr-z0o"/>
+                                        <constraint firstItem="KUx-rw-xf9" firstAttribute="leading" secondItem="KHh-Yu-ceF" secondAttribute="trailing" constant="8" symbolic="YES" id="Ezr-Ew-W4w"/>
+                                        <constraint firstItem="KUx-rw-xf9" firstAttribute="leading" secondItem="qVx-hu-6q3" secondAttribute="trailing" constant="8" symbolic="YES" id="HgW-27-Xs6"/>
+                                        <constraint firstItem="yxh-Ji-7mx" firstAttribute="centerY" secondItem="EqY-1z-x9Y" secondAttribute="centerY" id="Ktg-zt-z9a"/>
+                                        <constraint firstItem="KHh-Yu-ceF" firstAttribute="top" secondItem="qVx-hu-6q3" secondAttribute="bottom" constant="1" id="LlV-B2-hDi"/>
+                                        <constraint firstItem="qVx-hu-6q3" firstAttribute="leading" secondItem="KHh-Yu-ceF" secondAttribute="leading" id="iFF-SZ-GCi"/>
+                                        <constraint firstItem="qVx-hu-6q3" firstAttribute="top" secondItem="EqY-1z-x9Y" secondAttribute="topMargin" constant="1" id="iYN-qX-Cz6"/>
+                                        <constraint firstItem="KUx-rw-xf9" firstAttribute="top" secondItem="EqY-1z-x9Y" secondAttribute="topMargin" constant="16" id="qHK-F3-jy1"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -157,7 +169,7 @@
         <!--Log In-->
         <scene sceneID="mgV-s7-h5q">
             <objects>
-                <viewController title="Log In" id="Quz-7m-Y6X" customClass="LoginViewController" customModule="Attempt2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Log In" id="Quz-7m-Y6X" customClass="LoginViewController" customModule="PiRemote2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qNu-c2-1Qh"/>
                         <viewControllerLayoutGuide type="bottom" id="qYn-oJ-7PC"/>
@@ -208,7 +220,7 @@
                                 <rect key="frame" x="0.0" y="195" width="600" height="109"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListTableViewCell" rowHeight="73" id="hlQ-Pp-V6V" customClass="ListTableViewCell" customModule="Attempt2" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListTableViewCell" rowHeight="73" id="hlQ-Pp-V6V" customClass="ListTableViewCell" customModule="PiRemote2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="600" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hlQ-Pp-V6V" id="Ts1-jV-7Rn">
@@ -318,7 +330,7 @@
         <!--My Tab Bar Controller-->
         <scene sceneID="pQL-W5-Pp7">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="BLd-4L-rMJ" customClass="MyTabBarController" customModule="Attempt2" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="BLd-4L-rMJ" customClass="MyTabBarController" customModule="PiRemote2" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="NtD-NC-s1w">

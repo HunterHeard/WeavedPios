@@ -332,10 +332,8 @@ class OptionTableViewController: UITableViewController {
         
         cell.typeButton.setTitle(cell.getType(pin.type), forState: UIControlState.Normal)
         
-        if(!pin.isGPIO)
-        {
-            cell.typeButton.enabled = false;
-        }
+        //enables the cell only if it's an accepted GPIO
+        cell.enable(pin.isGPIO);
         
         //print("Loading Option Table Cell ", terminator: "")
         //print(indexPath.row);

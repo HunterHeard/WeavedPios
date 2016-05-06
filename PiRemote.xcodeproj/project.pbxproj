@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A0422D21CDBDFC100E29D4B /* nameSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0422D11CDBDFC100E29D4B /* nameSave.swift */; };
 		5A279FCE1CBFE53900272E05 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A279FCD1CBFE53900272E05 /* File.swift */; };
 		5A279FD01CBFE60800272E05 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A279FCF1CBFE60800272E05 /* LoginViewController.swift */; };
 		5A279FD21CC0790700272E05 /* weavedDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A279FD11CC0790700272E05 /* weavedDevice.swift */; };
@@ -25,6 +26,8 @@
 		5AD060961CADF6EE00BD6930 /* OptionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD060951CADF6EE00BD6930 /* OptionTableViewController.swift */; };
 		5AD060981CADF71C00BD6930 /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD060971CADF71C00BD6930 /* OptionTableViewCell.swift */; };
 		5AD0609A1CAE026D00BD6930 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD060991CAE026D00BD6930 /* MyTabBarController.swift */; };
+		7017893377ED43A6352CBDC8 /* Pods_PiRemote2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A8108CAC018A0193CDEB82 /* Pods_PiRemote2Tests.framework */; };
+		98BD717BF376A33A06999254 /* Pods_PiRemote2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE2FBB2881ACBDC0FDBF9CF /* Pods_PiRemote2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,19 +41,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A0422D11CDBDFC100E29D4B /* nameSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nameSave.swift; sourceTree = "<group>"; };
 		5A279FCD1CBFE53900272E05 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		5A279FCF1CBFE60800272E05 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5A279FD11CC0790700272E05 /* weavedDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weavedDevice.swift; sourceTree = "<group>"; };
 		5A279FD31CC13B7A00272E05 /* ListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableView.swift; sourceTree = "<group>"; };
 		5A279FD51CC150B400272E05 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		5AD060681CAD8E9800BD6930 /* Attempt2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attempt2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AD060681CAD8E9800BD6930 /* PiRemote2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PiRemote2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD0606C1CAD8E9800BD6930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD0606D1CAD8E9800BD6930 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AD0606F1CAD8E9800BD6930 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5AD060721CAD8E9800BD6930 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5AD060741CAD8E9800BD6930 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5AD060771CAD8E9800BD6930 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		5AD0607D1CAD8E9800BD6930 /* Attempt2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Attempt2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AD0607D1CAD8E9800BD6930 /* PiRemote2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PiRemote2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD060821CAD8E9800BD6930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD060831CAD8E9800BD6930 /* Attempt2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attempt2Tests.swift; sourceTree = "<group>"; };
 		5AD0608D1CAD96B100BD6930 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
@@ -60,6 +64,12 @@
 		5AD060951CADF6EE00BD6930 /* OptionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewController.swift; sourceTree = "<group>"; };
 		5AD060971CADF71C00BD6930 /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		5AD060991CAE026D00BD6930 /* MyTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		8DE2FBB2881ACBDC0FDBF9CF /* Pods_PiRemote2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiRemote2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98F14329E6F74BF219185F22 /* Pods-PiRemote2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiRemote2.release.xcconfig"; path = "Pods/Target Support Files/Pods-PiRemote2/Pods-PiRemote2.release.xcconfig"; sourceTree = "<group>"; };
+		A46CA54B6D9538B69B504C6F /* Pods-PiRemote2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiRemote2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PiRemote2/Pods-PiRemote2.debug.xcconfig"; sourceTree = "<group>"; };
+		F8A8108CAC018A0193CDEB82 /* Pods_PiRemote2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiRemote2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC27DC9684B28F5ECFD2F6ED /* Pods-PiRemote2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiRemote2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PiRemote2Tests/Pods-PiRemote2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		FCC500E3B34BD9824697E2BC /* Pods-PiRemote2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PiRemote2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PiRemote2Tests/Pods-PiRemote2Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98BD717BF376A33A06999254 /* Pods_PiRemote2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7017893377ED43A6352CBDC8 /* Pods_PiRemote2Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,14 +98,16 @@
 				5AD0606A1CAD8E9800BD6930 /* Attempt2 */,
 				5AD060801CAD8E9800BD6930 /* Attempt2Tests */,
 				5AD060691CAD8E9800BD6930 /* Products */,
+				D0254E1AB67AB985ACEA4252 /* Pods */,
+				B5C558071AFF2F846F6C9BC6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		5AD060691CAD8E9800BD6930 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5AD060681CAD8E9800BD6930 /* Attempt2.app */,
-				5AD0607D1CAD8E9800BD6930 /* Attempt2Tests.xctest */,
+				5AD060681CAD8E9800BD6930 /* PiRemote2.app */,
+				5AD0607D1CAD8E9800BD6930 /* PiRemote2.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +133,7 @@
 				5AD060741CAD8E9800BD6930 /* Images.xcassets */,
 				5AD060761CAD8E9800BD6930 /* LaunchScreen.xib */,
 				5AD0606B1CAD8E9800BD6930 /* Supporting Files */,
+				5A0422D11CDBDFC100E29D4B /* nameSave.swift */,
 			);
 			path = Attempt2;
 			sourceTree = "<group>";
@@ -148,42 +163,68 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B5C558071AFF2F846F6C9BC6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DE2FBB2881ACBDC0FDBF9CF /* Pods_PiRemote2.framework */,
+				F8A8108CAC018A0193CDEB82 /* Pods_PiRemote2Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0254E1AB67AB985ACEA4252 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A46CA54B6D9538B69B504C6F /* Pods-PiRemote2.debug.xcconfig */,
+				98F14329E6F74BF219185F22 /* Pods-PiRemote2.release.xcconfig */,
+				FC27DC9684B28F5ECFD2F6ED /* Pods-PiRemote2Tests.debug.xcconfig */,
+				FCC500E3B34BD9824697E2BC /* Pods-PiRemote2Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5AD060671CAD8E9800BD6930 /* Attempt2 */ = {
+		5AD060671CAD8E9800BD6930 /* PiRemote2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5AD060871CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "Attempt2" */;
+			buildConfigurationList = 5AD060871CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "PiRemote2" */;
 			buildPhases = (
+				843DA8C1BA24127D1374697F /* 📦 Check Pods Manifest.lock */,
 				5AD060641CAD8E9800BD6930 /* Sources */,
 				5AD060651CAD8E9800BD6930 /* Frameworks */,
 				5AD060661CAD8E9800BD6930 /* Resources */,
+				75841A5B998FF1F6E124288D /* 📦 Embed Pods Frameworks */,
+				8ABE18044F1D3B13274D604A /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Attempt2;
+			name = PiRemote2;
 			productName = Attempt2;
-			productReference = 5AD060681CAD8E9800BD6930 /* Attempt2.app */;
+			productReference = 5AD060681CAD8E9800BD6930 /* PiRemote2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5AD0607C1CAD8E9800BD6930 /* Attempt2Tests */ = {
+		5AD0607C1CAD8E9800BD6930 /* PiRemote2Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5AD0608A1CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "Attempt2Tests" */;
+			buildConfigurationList = 5AD0608A1CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "PiRemote2Tests" */;
 			buildPhases = (
+				7B9A9D4728144424432B2C1A /* 📦 Check Pods Manifest.lock */,
 				5AD060791CAD8E9800BD6930 /* Sources */,
 				5AD0607A1CAD8E9800BD6930 /* Frameworks */,
 				5AD0607B1CAD8E9800BD6930 /* Resources */,
+				B2A4AF366C9FF8045AF5EC9E /* 📦 Embed Pods Frameworks */,
+				347169B920012C5A59892712 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				5AD0607F1CAD8E9800BD6930 /* PBXTargetDependency */,
 			);
-			name = Attempt2Tests;
+			name = PiRemote2Tests;
 			productName = Attempt2Tests;
-			productReference = 5AD0607D1CAD8E9800BD6930 /* Attempt2Tests.xctest */;
+			productReference = 5AD0607D1CAD8E9800BD6930 /* PiRemote2.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -200,6 +241,14 @@
 					5AD060671CAD8E9800BD6930 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = P3H85LZ522;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					5AD0607C1CAD8E9800BD6930 = {
 						CreatedOnToolsVersion = 6.2;
@@ -207,7 +256,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5AD060631CAD8E9700BD6930 /* Build configuration list for PBXProject "Attempt2" */;
+			buildConfigurationList = 5AD060631CAD8E9700BD6930 /* Build configuration list for PBXProject "PiRemote" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -220,8 +269,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5AD060671CAD8E9800BD6930 /* Attempt2 */,
-				5AD0607C1CAD8E9800BD6930 /* Attempt2Tests */,
+				5AD060671CAD8E9800BD6930 /* PiRemote2 */,
+				5AD0607C1CAD8E9800BD6930 /* PiRemote2Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -246,6 +295,99 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		347169B920012C5A59892712 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PiRemote2Tests/Pods-PiRemote2Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75841A5B998FF1F6E124288D /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PiRemote2/Pods-PiRemote2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B9A9D4728144424432B2C1A /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		843DA8C1BA24127D1374697F /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8ABE18044F1D3B13274D604A /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PiRemote2/Pods-PiRemote2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2A4AF366C9FF8045AF5EC9E /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PiRemote2Tests/Pods-PiRemote2Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5AD060641CAD8E9800BD6930 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -256,6 +398,7 @@
 				5AD0609A1CAE026D00BD6930 /* MyTabBarController.swift in Sources */,
 				5AD060701CAD8E9800BD6930 /* ViewController.swift in Sources */,
 				5AD060961CADF6EE00BD6930 /* OptionTableViewController.swift in Sources */,
+				5A0422D21CDBDFC100E29D4B /* nameSave.swift in Sources */,
 				5A279FD21CC0790700272E05 /* weavedDevice.swift in Sources */,
 				5A279FCE1CBFE53900272E05 /* File.swift in Sources */,
 				5A279FD61CC150B400272E05 /* ListTableViewCell.swift in Sources */,
@@ -281,7 +424,7 @@
 /* Begin PBXTargetDependency section */
 		5AD0607F1CAD8E9800BD6930 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5AD060671CAD8E9800BD6930 /* Attempt2 */;
+			target = 5AD060671CAD8E9800BD6930 /* PiRemote2 */;
 			targetProxy = 5AD0607E1CAD8E9800BD6930 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -387,32 +530,37 @@
 		};
 		5AD060881CAD8E9800BD6930 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A46CA54B6D9538B69B504C6F /* Pods-PiRemote2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Attempt2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.m2mcircuits.piremote;
+				PRODUCT_NAME = PiRemote2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		5AD060891CAD8E9800BD6930 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98F14329E6F74BF219185F22 /* Pods-PiRemote2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Attempt2/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.m2mcircuits.piremote;
+				PRODUCT_NAME = PiRemote2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		5AD0608B1CAD8E9800BD6930 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC27DC9684B28F5ECFD2F6ED /* Pods-PiRemote2Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -425,13 +573,14 @@
 				);
 				INFOPLIST_FILE = Attempt2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Attempt2.app/Attempt2";
+				PRODUCT_NAME = PiRemote2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PiRemote2.app/PiRemote2";
 			};
 			name = Debug;
 		};
 		5AD0608C1CAD8E9800BD6930 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCC500E3B34BD9824697E2BC /* Pods-PiRemote2Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -440,15 +589,15 @@
 				);
 				INFOPLIST_FILE = Attempt2Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Attempt2.app/Attempt2";
+				PRODUCT_NAME = PiRemote2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PiRemote2.app/PiRemote2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5AD060631CAD8E9700BD6930 /* Build configuration list for PBXProject "Attempt2" */ = {
+		5AD060631CAD8E9700BD6930 /* Build configuration list for PBXProject "PiRemote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AD060851CAD8E9800BD6930 /* Debug */,
@@ -457,7 +606,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5AD060871CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "Attempt2" */ = {
+		5AD060871CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "PiRemote2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AD060881CAD8E9800BD6930 /* Debug */,
@@ -466,7 +615,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5AD0608A1CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "Attempt2Tests" */ = {
+		5AD0608A1CAD8E9800BD6930 /* Build configuration list for PBXNativeTarget "PiRemote2Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AD0608B1CAD8E9800BD6930 /* Debug */,
