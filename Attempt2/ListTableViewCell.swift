@@ -16,6 +16,8 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UITextField!
     @IBOutlet weak var passwordLabel: UITextField!
     
+    var loggedIn = false;
+    
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
@@ -47,12 +49,21 @@ class ListTableViewCell: UITableViewCell {
     
     func setLog(logged: Bool)
     {
+        loggedIn = logged;
+        
         if(logged)
         {
             devLogButton.setTitle("L-Out", forState: UIControlState.Normal);
-            backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.3);
-            
+            backgroundColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3);
+            return;
         }
+        
+        
+        devLogButton.setTitle("Login", forState: UIControlState.Normal);
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3);
+
+
+        
     }
     
     

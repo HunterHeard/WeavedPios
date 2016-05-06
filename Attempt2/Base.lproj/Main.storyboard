@@ -79,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionTableViewCell" rowHeight="76" id="qbD-Jt-TdI" customClass="OptionTableViewCell" customModule="PiRemote2" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OptionTableViewCell" rowHeight="76" id="qbD-Jt-TdI" customClass="OptionTableViewCell" customModule="PiRemote2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="22" width="600" height="76"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qbD-Jt-TdI" id="EqY-1z-x9Y">
@@ -118,7 +118,7 @@
                                                 <action selector="typePress:" destination="qbD-Jt-TdI" eventType="touchUpInside" id="TxV-rf-OSS"/>
                                             </connections>
                                         </button>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxh-Ji-7mx">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pin Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxh-Ji-7mx">
                                             <rect key="frame" x="8" y="23" width="97" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="97" id="6JG-kU-O17"/>
@@ -211,9 +211,9 @@
                                 <rect key="frame" x="4" y="167" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Error Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f76-YV-LDc">
-                                <rect key="frame" x="3" y="517" width="408" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <rect key="frame" x="3" y="509" width="408" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ufy-EQ-50x">

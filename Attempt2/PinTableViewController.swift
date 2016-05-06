@@ -247,7 +247,7 @@ class PinTableViewController: UITableViewController {
             return numberOfControlPins();
         }
         
-        return numberOfMonitorPins();
+        return numberOfMonitorPins() + 1;
     }
 
     
@@ -268,6 +268,17 @@ class PinTableViewController: UITableViewController {
         
         let ind = getPinDegree(indexPath.section+1, degree:indexPath.row);
         
+        
+        if(ind == -1)
+        {
+            cell.nameLabel.text = "Ignore";
+            cell.Hlabel = "";
+            cell.Llabel = "";
+            cell.onState.enabled = false;
+            return cell;
+        }
+        
+        
         let pin = pins[ind];
         
         
@@ -278,7 +289,7 @@ class PinTableViewController: UITableViewController {
         cell.Hlabel = pin.Hname;
         cell.Llabel = pin.Lname;
         
-        cell.nameLabel.text = String(ind);
+        //cell.nameLabel.text = String(ind);
 //        
         cell.onState.on = pin.on;
         cell.onState.pinNumber = ind;

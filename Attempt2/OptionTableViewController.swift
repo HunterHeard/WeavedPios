@@ -8,10 +8,11 @@
 
 import UIKit
 
-class OptionTableViewController: UITableViewController {
+class OptionTableViewController: UITableViewController, UITextFieldDelegate {
 
     
     
+
     
     var pins = [Pin]()
     
@@ -46,6 +47,7 @@ class OptionTableViewController: UITableViewController {
         
         if(sender.tag < 0 || sender.tag >= pins.count)
         {
+            print("No tag");
             return;
         }
         
@@ -247,7 +249,7 @@ class OptionTableViewController: UITableViewController {
 
         // Return the number of rows in the section.
         
-        return pins.count;
+        return pins.count + 1;
         
     }
 
@@ -299,6 +301,19 @@ class OptionTableViewController: UITableViewController {
         
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    
+    @IBAction func userTappedBackground(sender: AnyObject) {
+        
+        self.view.endEditing(true);
+        
+    
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         //ask someone what these mean
@@ -313,6 +328,16 @@ class OptionTableViewController: UITableViewController {
         
         //right now the pins are tied to the index of the table and vice versa
         //so don't put anything else in the table
+        
+        if(indexPath.row > pins.count - 1)
+        {
+            cell.nameLabel.text = "IGNORE";
+            cell.enable(false);
+            
+            return cell;
+        }
+        
+        
         let pin = pins[indexPath.row];
         
         
@@ -321,6 +346,11 @@ class OptionTableViewController: UITableViewController {
         cell.nameLabel.text = pin.name;
         cell.Hlabel.text = pin.Hname;
         cell.Llabel.text = pin.Lname;
+        
+        cell.nameLabel.delegate = self;
+        cell.Hlabel.delegate = self;
+        cell.Llabel.delegate = self;
+        
         
         cell.typeNumber = pin.type;
         cell.typeButton.tag = indexPath.row;

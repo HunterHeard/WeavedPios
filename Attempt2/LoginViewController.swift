@@ -76,6 +76,36 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var cell = getListCellAtIndex(sender.tag)
         
+        var tbc = self.parentViewController as! MyTabBarController;
+        
+        
+        if(cell.loggedIn)
+        {
+            //"log out"
+            
+            tbc.logOutOfDevice();
+            
+            cell.setLog(false);
+            
+            
+            
+            
+            
+        }
+        
+        //We're logged in, just not on this cell
+        if(tbc.webioPiLogged)
+        {
+            
+            tbc.logOutOfDevice();
+            
+            //find the cell we're logged in on and log out of it
+            //or just log out of all of them why don't we
+            
+            
+            
+        }
+        
         if(cell.passwordLabel.text == "")
         {
             print("Blank device password");
@@ -530,7 +560,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         print("reason: " + (jsonData.valueForKey("reason") as! String));
                         
-                        self.ErrorLabel.text = "WebIOPi device authentification failed";
+                        self.ErrorLabel.text = "WebIOPi device authentification failed:\n" + (jsonData.valueForKey("reason") as! String);
                         
                         
                     }

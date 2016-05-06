@@ -602,6 +602,29 @@ class MyTabBarController: UITabBarController {
         
     }
     
+    func logOutOfDevice()
+    {
+        
+        devProxy = "";
+        webioPiLogged = false;
+
+        //?
+        session = NSURLSession();
+        raspberryDevice = NSObject();
+        base64LoginString = NSString();
+        
+        
+        
+        //clear the lists
+        tabBarPins = Pin.getEmpty();
+        let optionView = self.childViewControllers[1] as! OptionTableViewController;
+        optionView.pins = self.tabBarPins;
+        optionView.tableView.reloadData();
+        optionView.syncWithTable();
+        
+        
+    }
+    
     /*
     // MARK: - Navigation
 
